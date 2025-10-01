@@ -225,6 +225,201 @@
         border-radius: 0 0 20px 20px;
     }
     
+    /* Custom Delete Modal Styles */
+    .delete-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .delete-modal-container {
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .delete-modal-content {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: slideIn 0.3s ease;
+        position: relative;
+    }
+    
+    .delete-modal-header {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+    }
+    
+    .delete-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.5rem;
+        animation: pulse 2s infinite;
+    }
+    
+    .delete-modal-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .delete-modal-body {
+        padding: 40px 30px;
+        text-align: center;
+    }
+    
+    .delete-message {
+        font-size: 1.1rem;
+        color: #374151;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+    
+    .portfolio-info {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border: 2px solid #f59e0b;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        font-size: 1.1rem;
+        color: #92400e;
+    }
+    
+    .warning-text {
+        color: #dc2626;
+        font-weight: 600;
+        margin: 20px 0 0;
+        font-size: 0.95rem;
+    }
+    
+    .warning-text i {
+        margin-right: 8px;
+        animation: blink 1.5s infinite;
+    }
+    
+    .delete-modal-footer {
+        background: #f8fafc;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .btn-cancel, .btn-delete {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .btn-cancel {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        color: white;
+    }
+    
+    .btn-cancel:hover {
+        background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(75, 85, 99, 0.3);
+    }
+    
+    .btn-delete {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        color: white;
+    }
+    
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+    }
+    
+    .btn-delete:active, .btn-cancel:active {
+        transform: translateY(0);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+        from { 
+            opacity: 0;
+            transform: translateY(-50px) scale(0.9);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .delete-modal-container {
+            width: 95%;
+        }
+        
+        .delete-modal-header {
+            padding: 25px 20px;
+        }
+        
+        .delete-modal-body {
+            padding: 30px 20px;
+        }
+        
+        .delete-modal-footer {
+            padding: 20px;
+            flex-direction: column;
+        }
+        
+        .btn-cancel, .btn-delete {
+            width: 100%;
+            min-width: auto;
+        }
+    }
+    
     @keyframes rotate {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
@@ -326,35 +521,11 @@
                                     <a href="{{ route('admin.portfolios.edit', $portfolio) }}" class="btn btn-sm btn-warning" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $portfolio->id }}" title="Hapus">
+                                    <button type="button" class="btn btn-sm btn-danger" 
+                                            onclick="showDeleteConfirm({{ $portfolio->id }}, '{{ addslashes($portfolio->title) }}')" 
+                                            title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    
-                                    <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{ $portfolio->id }}" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Konfirmasi Hapus</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apakah Anda yakin ingin menghapus portfolio <strong>"{{ $portfolio->title }}"</strong>?</p>
-                                                    <p class="text-danger"><small><i class="fas fa-exclamation-triangle"></i> Aksi ini tidak dapat dibatalkan!</small></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                    <form action="{{ route('admin.portfolios.destroy', $portfolio) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i class="fas fa-trash"></i> Hapus
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -377,4 +548,129 @@
         @endif
     </div>
 </div>
+
+<!-- Custom Delete Confirmation Modal -->
+<div id="deleteConfirmModal" class="delete-modal-overlay" style="display: none;">
+    <div class="delete-modal-container">
+        <div class="delete-modal-content">
+            <div class="delete-modal-header">
+                <div class="delete-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Konfirmasi Hapus Portfolio</h3>
+            </div>
+            
+            <div class="delete-modal-body">
+                <p class="delete-message">Apakah Anda yakin ingin menghapus portfolio ini?</p>
+                <div class="portfolio-info">
+                    <strong id="portfolioNameToDelete"></strong>
+                </div>
+                <p class="warning-text">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Aksi ini tidak dapat dibatalkan!
+                </p>
+            </div>
+            
+            <div class="delete-modal-footer">
+                <button type="button" class="btn-cancel" onclick="hideDeleteConfirm()">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+                <button type="button" class="btn-delete" onclick="executeDelete()">
+                    <i class="fas fa-trash"></i> Ya, Hapus!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('scripts')
+<script>
+    let currentPortfolioId = null;
+    let currentPortfolioTitle = null;
+    
+    function showDeleteConfirm(portfolioId, portfolioTitle) {
+        currentPortfolioId = portfolioId;
+        currentPortfolioTitle = portfolioTitle;
+        
+        // Update modal content
+        document.getElementById('portfolioNameToDelete').textContent = '"' + portfolioTitle + '"';
+        
+        // Show modal
+        const modal = document.getElementById('deleteConfirmModal');
+        modal.style.display = 'flex';
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        
+        // Focus on cancel button for accessibility
+        setTimeout(() => {
+            modal.querySelector('.btn-cancel').focus();
+        }, 100);
+    }
+    
+    function hideDeleteConfirm() {
+        const modal = document.getElementById('deleteConfirmModal');
+        modal.style.display = 'none';
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+        
+        // Clear data
+        currentPortfolioId = null;
+        currentPortfolioTitle = null;
+    }
+    
+    function executeDelete() {
+        if (!currentPortfolioId) return;
+        
+        // Show loading state
+        const deleteBtn = document.querySelector('.btn-delete');
+        const originalText = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghapus...';
+        deleteBtn.disabled = true;
+        
+        // Create and submit form
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/admin/portfolios/' + currentPortfolioId;
+        
+        // Add CSRF token
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = '_token';
+        csrfToken.value = '{{ csrf_token() }}';
+        form.appendChild(csrfToken);
+        
+        // Add DELETE method
+        const methodField = document.createElement('input');
+        methodField.type = 'hidden';
+        methodField.name = '_method';
+        methodField.value = 'DELETE';
+        form.appendChild(methodField);
+        
+        // Add to body and submit
+        document.body.appendChild(form);
+        form.submit();
+    }
+    
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('deleteConfirmModal');
+        if (e.target === modal) {
+            hideDeleteConfirm();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('deleteConfirmModal');
+            if (modal.style.display === 'flex') {
+                hideDeleteConfirm();
+            }
+        }
+    });
+</script>
 @endsection
