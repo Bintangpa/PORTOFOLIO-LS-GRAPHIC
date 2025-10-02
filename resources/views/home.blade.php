@@ -74,9 +74,20 @@
         transform: translateY(-10px);
         box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     }
-    .portfolio-card img {
+    
+    .portfolio-image-container {
+        position: relative;
         width: 100%;
-        height: 300px;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+    
+    .portfolio-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         transition: transform 0.3s;
     }
@@ -99,7 +110,7 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
         padding: 5px 15px;
         border-radius: 20px;
@@ -108,7 +119,7 @@
     }
     
     .text-gradient {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -130,7 +141,7 @@
     
     .btn-hero-primary:hover {
         background: white;
-        color: #1e3a8a;
+        color: #000099;
         transform: translateY(-2px);
         box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
     }
@@ -214,14 +225,16 @@
         
         @if($portfolios->count() > 0)
             <div class="row">
-                @foreach($portfolios->take(6) as $portfolio)
+                @foreach($portfolios as $portfolio)
                     <div class="col-lg-4 col-md-6">
                         <a href="{{ route('portfolio.show', $portfolio) }}" class="text-decoration-none">
                             <div class="portfolio-card">
                                 @if($portfolio->category)
                                     <span class="badge-category">{{ $portfolio->category }}</span>
                                 @endif
-                                <img src="{{ asset('storage/' . $portfolio->image_path) }}" alt="{{ $portfolio->title }}">
+                                <div class="portfolio-image-container">
+                                    <img src="{{ asset('storage/' . $portfolio->image_path) }}" alt="{{ $portfolio->title }}">
+                                </div>
                                 <div class="portfolio-card-body">
                                     <h5 class="text-dark">{{ $portfolio->title }}</h5>
                                     <p>{{ Str::limit($portfolio->description, 80) }}</p>
@@ -232,13 +245,11 @@
                 @endforeach
             </div>
             
-            @if($portfolios->count() > 6)
-                <div class="text-center mt-4">
-                    <a href="{{ route('home') }}?show=all" class="btn btn-primary btn-lg">
-                        <i class="fas fa-th me-2"></i>Lihat Semua Portfolio
-                    </a>
-                </div>
-            @endif
+            <div class="text-center mt-4">
+                <a href="{{ route('portfolio') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-th me-2"></i>Lihat Semua Portfolio
+                </a>
+            </div>
         @else
             <div class="text-center py-5">
                 <i class="fas fa-folder-open fa-5x text-muted mb-3"></i>

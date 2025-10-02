@@ -25,7 +25,7 @@ class PortfolioController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:15360',
             'category' => 'nullable|max:255',
             'client' => 'nullable|max:255',
             'project_date' => 'nullable|date',
@@ -62,7 +62,7 @@ class PortfolioController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:15360',
             'category' => 'nullable|max:255',
             'client' => 'nullable|max:255',
             'project_date' => 'nullable|date',

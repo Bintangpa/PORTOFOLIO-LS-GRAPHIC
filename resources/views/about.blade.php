@@ -25,7 +25,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="about-image-wrapper">
-                    <img src="{{ asset('images/logo-ls.png') }}" alt="LittleStar Studio" class="img-fluid about-logo">
+                    <img src="{{ asset('images/logo-ls-biru.png') }}" alt="LittleStar Studio" class="img-fluid about-logo">
                 </div>
             </div>
         </div>

@@ -9,6 +9,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // For homepage, get only 5 latest portfolios
+        $portfolios = Portfolio::latest()->take(5)->get();
+        
+        return view('home', compact('portfolios'));
+    }
+    
+    public function portfolio(Request $request)
+    {
         $query = Portfolio::query();
         
         // Handle search functionality
@@ -22,15 +30,10 @@ class HomeController extends Controller
             });
         }
         
-        // Handle show all parameter
-        if ($request->get('show') === 'all' || $request->filled('search')) {
-            $portfolios = $query->latest()->paginate(12);
-        } else {
-            // For homepage, get all portfolios but only show 6 in view
-            $portfolios = $query->latest()->paginate(100); // Get more for stats
-        }
+        // Get all portfolios with pagination
+        $portfolios = $query->latest()->paginate(12);
         
-        return view('home', compact('portfolios'));
+        return view('portfolio', compact('portfolios'));
     }
 
     public function show(Portfolio $portfolio)

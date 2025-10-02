@@ -46,14 +46,14 @@
     }
     
     .stats-card {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
         border-radius: 20px;
         padding: 30px;
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 153, 0.3);
     }
     
     .stats-card::before {
@@ -69,7 +69,7 @@
     
     .stats-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4);
+        box-shadow: 0 20px 40px rgba(0, 0, 153, 0.4);
     }
     
     .stats-card h3 {
@@ -117,7 +117,7 @@
         margin: 0;
         font-weight: 700;
         font-size: 2rem;
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -139,7 +139,7 @@
     
     .portfolio-title {
         font-weight: 700;
-        color: #1e3a8a;
+        color: #000099;
         margin-bottom: 5px;
         font-size: 1.1rem;
     }
@@ -151,7 +151,7 @@
     }
     
     .category-badge {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
         padding: 4px 12px;
         border-radius: 20px;
@@ -202,7 +202,7 @@
     }
     
     .modal-header {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
         border-radius: 20px 20px 0 0;
         border: none;

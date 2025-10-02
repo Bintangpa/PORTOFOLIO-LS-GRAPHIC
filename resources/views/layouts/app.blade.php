@@ -16,7 +16,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
             min-height: 100vh;
         }
         .navbar {
@@ -28,7 +28,7 @@
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -45,16 +45,16 @@
         }
         
         .navbar-nav .nav-link:hover {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
             color: white !important;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 153, 0.3);
         }
         
         .navbar-nav .nav-link.active {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
             color: white !important;
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 0, 153, 0.4);
         }
         
         .navbar-nav .nav-link i {
@@ -76,24 +76,24 @@
         }
         
         .navbar .form-control:focus {
-            border-color: #1e3a8a;
-            box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.25);
+            border-color: #000099;
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 153, 0.25);
         }
         
         .navbar .btn-outline-primary {
-            border: 2px solid #1e3a8a;
-            color: #1e3a8a;
+            border: 2px solid #000099;
+            color: #000099;
             border-radius: 0 25px 25px 0;
             padding: 0.5rem 1rem;
             transition: all 0.3s ease;
         }
         
         .navbar .btn-outline-primary:hover {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            border-color: #1e3a8a;
+            background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+            border-color: #000099;
             color: white;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 153, 0.3);
         }
         
         /* Responsive Navbar */
@@ -122,7 +122,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
             display: flex;
             justify-content: center;
             align-items: center;

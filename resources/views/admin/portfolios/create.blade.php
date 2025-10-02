@@ -297,6 +297,41 @@
         font-weight: 700;
     }
     
+    .upload-notes .alert-info {
+        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+        border: 2px solid #29b6f6;
+        border-radius: 12px;
+        color: #01579b;
+        font-size: 0.9rem;
+    }
+    
+    .upload-notes .alert-info h6 {
+        color: #0277bd;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+    
+    .upload-notes .alert-info ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    
+    .upload-notes .alert-info li {
+        position: relative;
+        padding-left: 1.5rem;
+        line-height: 1.5;
+    }
+    
+    .upload-notes .alert-info li::before {
+        content: '\2022';
+        color: #0288d1;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.2rem;
+    }
+    
     /* Force button positioning */
     .action-buttons .position-absolute.start-0 {
         left: 40px !important;
@@ -411,13 +446,30 @@
                         <div class="row row-compact">
                             <div class="col-md-6">
                                 <div class="mb-compact">
-                                    <label for="category" class="form-label">
+                                    <label for="category_select" class="form-label">
                                         <i class="fas fa-tag me-1"></i>
                                         Kategori
                                     </label>
-                                    <input type="text" class="form-control @error('category') is-invalid @enderror" 
-                                           id="category" name="category" value="{{ old('category') }}" 
-                                           placeholder="Logo Design, Web Design...">
+                                    <select class="form-select @error('category') is-invalid @enderror" 
+                                            id="category_select" name="category_select" onchange="toggleCustomCategory()">
+                                        <option value="">Pilih Kategori...</option>
+                                        <option value="LOGO DESIGN" {{ old('category_select') == 'LOGO DESIGN' ? 'selected' : '' }}>LOGO DESIGN</option>
+                                        <option value="POSTER DESIGN" {{ old('category_select') == 'POSTER DESIGN' ? 'selected' : '' }}>POSTER DESIGN</option>
+                                        <option value="COMMISSION DESIGN" {{ old('category_select') == 'COMMISSION DESIGN' ? 'selected' : '' }}>COMMISSION DESIGN</option>
+                                        <option value="PERSONAL USE DESIGN" {{ old('category_select') == 'PERSONAL USE DESIGN' ? 'selected' : '' }}>PERSONAL USE DESIGN</option>
+                                        <option value="LAINNYA" {{ old('category_select') == 'LAINNYA' ? 'selected' : '' }}>LAINNYA</option>
+                                    </select>
+                                    
+                                    <!-- Custom Category Input (Hidden by default) -->
+                                    <div id="custom_category_wrapper" class="mt-2" style="display: none;">
+                                        <input type="text" class="form-control @error('category') is-invalid @enderror" 
+                                               id="custom_category" name="custom_category" value="{{ old('custom_category') }}" 
+                                               placeholder="Masukkan kategori custom...">
+                                    </div>
+                                    
+                                    <!-- Hidden input to store final category value -->
+                                    <input type="hidden" id="category" name="category" value="{{ old('category') }}">
+                                    
                                     @error('category')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -467,7 +519,7 @@
                                     <i class="fas fa-cloud-upload-alt"></i>
                                 </div>
                                 <div class="upload-text">Klik untuk upload gambar</div>
-                                <div class="upload-hint">JPG, PNG, GIF (Max: 2MB)</div>
+                                <div class="upload-hint">JPG, PNG, GIF (Max: 15MB)</div>
                                 
                                 <input type="file" class="d-none @error('image') is-invalid @enderror" 
                                        id="image" name="image" accept="image/*" required onchange="previewImage(event)">
@@ -476,6 +528,17 @@
                             @error('image')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
+                            
+                            <!-- Upload Notes -->
+                            <div class="upload-notes mt-3">
+                                <div class="alert alert-info p-3 mb-0">
+                                    <h6 class="mb-2"><i class="fas fa-info-circle me-2"></i>Catatan Penting:</h6>
+                                    <ul class="mb-0 ps-3">
+                                        <li class="mb-1">Batas ukuran gambar yang dapat diunggah adalah <strong>15 MB</strong>.</li>
+                                        <li class="mb-0">Gambar yang di upload harus memiliki rasio ukuran <strong>4:3</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
                             
                             <img id="preview" class="preview-image" alt="Preview">
                         </div>
@@ -521,10 +584,55 @@
         }
     }
     
+    function toggleCustomCategory() {
+        const categorySelect = document.getElementById('category_select');
+        const customCategoryWrapper = document.getElementById('custom_category_wrapper');
+        const customCategoryInput = document.getElementById('custom_category');
+        const hiddenCategoryInput = document.getElementById('category');
+        
+        if (categorySelect.value === 'LAINNYA') {
+            customCategoryWrapper.style.display = 'block';
+            customCategoryInput.focus();
+            // Clear the hidden input when switching to custom
+            hiddenCategoryInput.value = '';
+        } else {
+            customCategoryWrapper.style.display = 'none';
+            customCategoryInput.value = '';
+            // Set the hidden input to the selected predefined category
+            hiddenCategoryInput.value = categorySelect.value;
+        }
+    }
+    
+    // Update hidden category input when custom category is typed
+    function updateCategoryValue() {
+        const categorySelect = document.getElementById('category_select');
+        const customCategoryInput = document.getElementById('custom_category');
+        const hiddenCategoryInput = document.getElementById('category');
+        
+        if (categorySelect.value === 'LAINNYA') {
+            hiddenCategoryInput.value = customCategoryInput.value;
+        } else {
+            hiddenCategoryInput.value = categorySelect.value;
+        }
+    }
+    
     // Drag and Drop functionality
     document.addEventListener('DOMContentLoaded', function() {
         const uploadArea = document.querySelector('.upload-area');
         const fileInput = document.getElementById('image');
+        const customCategoryInput = document.getElementById('custom_category');
+        const portfolioForm = document.getElementById('portfolioForm');
+        
+        // Initialize category on page load
+        toggleCustomCategory();
+        
+        // Add event listener for custom category input
+        customCategoryInput.addEventListener('input', updateCategoryValue);
+        
+        // Add event listener for form submission
+        portfolioForm.addEventListener('submit', function(e) {
+            updateCategoryValue(); // Ensure category value is updated before submission
+        });
         
         // Prevent default drag behaviors
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {

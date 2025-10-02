@@ -36,6 +36,41 @@
     .change-image-label:hover {
         background: rgba(0,0,0,0.8);
     }
+    
+    .upload-notes .alert-info {
+        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+        border: 2px solid #29b6f6;
+        border-radius: 12px;
+        color: #01579b;
+        font-size: 0.9rem;
+    }
+    
+    .upload-notes .alert-info h6 {
+        color: #0277bd;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+    
+    .upload-notes .alert-info ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    
+    .upload-notes .alert-info li {
+        position: relative;
+        padding-left: 1.5rem;
+        line-height: 1.5;
+    }
+    
+    .upload-notes .alert-info li::before {
+        content: '\2022';
+        color: #0288d1;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.2rem;
+    }
 </style>
 @endsection
 
@@ -76,10 +111,28 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="category" class="form-label">Kategori</label>
-                                        <input type="text" class="form-control @error('category') is-invalid @enderror" 
-                                               id="category" name="category" value="{{ old('category', $portfolio->category) }}" 
-                                               placeholder="Contoh: Logo Design, Web Design">
+                                        <label for="category_select" class="form-label">Kategori</label>
+                                        <select class="form-select @error('category') is-invalid @enderror" 
+                                                id="category_select" name="category_select" onchange="toggleCustomCategory()">
+                                            <option value="">Pilih Kategori...</option>
+                                            <option value="LOGO DESIGN" {{ (old('category_select') ?? $portfolio->category) == 'LOGO DESIGN' ? 'selected' : '' }}>LOGO DESIGN</option>
+                                            <option value="POSTER DESIGN" {{ (old('category_select') ?? $portfolio->category) == 'POSTER DESIGN' ? 'selected' : '' }}>POSTER DESIGN</option>
+                                            <option value="COMMISSION DESIGN" {{ (old('category_select') ?? $portfolio->category) == 'COMMISSION DESIGN' ? 'selected' : '' }}>COMMISSION DESIGN</option>
+                                            <option value="PERSONAL USE DESIGN" {{ (old('category_select') ?? $portfolio->category) == 'PERSONAL USE DESIGN' ? 'selected' : '' }}>PERSONAL USE DESIGN</option>
+                                            <option value="LAINNYA" {{ !in_array((old('category_select') ?? $portfolio->category), ['LOGO DESIGN', 'POSTER DESIGN', 'COMMISSION DESIGN', 'PERSONAL USE DESIGN']) && !empty($portfolio->category) ? 'selected' : '' }}>LAINNYA</option>
+                                        </select>
+                                        
+                                        <!-- Custom Category Input (Hidden by default) -->
+                                        <div id="custom_category_wrapper" class="mt-2" style="display: none;">
+                                            <input type="text" class="form-control @error('category') is-invalid @enderror" 
+                                                   id="custom_category" name="custom_category" 
+                                                   value="{{ !in_array($portfolio->category, ['LOGO DESIGN', 'POSTER DESIGN', 'COMMISSION DESIGN', 'PERSONAL USE DESIGN']) ? $portfolio->category : '' }}" 
+                                                   placeholder="Masukkan kategori custom...">
+                                        </div>
+                                        
+                                        <!-- Hidden input to store final category value -->
+                                        <input type="hidden" id="category" name="category" value="{{ old('category', $portfolio->category) }}">
+                                        
                                         @error('category')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -126,8 +179,19 @@
                                 @error('image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
-                                <small class="text-muted d-block mt-2">Format: JPG, JPEG, PNG, GIF (Max: 2MB)</small>
+                                <small class="text-muted d-block mt-2">Format: JPG, JPEG, PNG, GIF (Max: 15MB)</small>
                                 <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar</small>
+                                
+                                <!-- Upload Notes -->
+                                <div class="upload-notes mt-3">
+                                    <div class="alert alert-info p-3 mb-0">
+                                        <h6 class="mb-2"><i class="fas fa-info-circle me-2"></i>Catatan Penting:</h6>
+                                        <ul class="mb-0 ps-3">
+                                            <li class="mb-1">Batas ukuran gambar yang dapat diunggah adalah <strong>15 MB</strong>.</li>
+                                            <li class="mb-0">Gambar yang di upload harus memiliki rasio ukuran <strong>4:3</strong>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -163,5 +227,52 @@
             reader.readAsDataURL(event.target.files[0]);
         }
     }
+    
+    function toggleCustomCategory() {
+        const categorySelect = document.getElementById('category_select');
+        const customCategoryWrapper = document.getElementById('custom_category_wrapper');
+        const customCategoryInput = document.getElementById('custom_category');
+        const hiddenCategoryInput = document.getElementById('category');
+        
+        if (categorySelect.value === 'LAINNYA') {
+            customCategoryWrapper.style.display = 'block';
+            customCategoryInput.focus();
+            // Set the hidden input to the current custom value
+            hiddenCategoryInput.value = customCategoryInput.value;
+        } else {
+            customCategoryWrapper.style.display = 'none';
+            // Set the hidden input to the selected predefined category
+            hiddenCategoryInput.value = categorySelect.value;
+        }
+    }
+    
+    // Update hidden category input when custom category is typed
+    function updateCategoryValue() {
+        const categorySelect = document.getElementById('category_select');
+        const customCategoryInput = document.getElementById('custom_category');
+        const hiddenCategoryInput = document.getElementById('category');
+        
+        if (categorySelect.value === 'LAINNYA') {
+            hiddenCategoryInput.value = customCategoryInput.value;
+        } else {
+            hiddenCategoryInput.value = categorySelect.value;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const customCategoryInput = document.getElementById('custom_category');
+        const form = document.querySelector('form');
+        
+        // Initialize category on page load
+        toggleCustomCategory();
+        
+        // Add event listener for custom category input
+        customCategoryInput.addEventListener('input', updateCategoryValue);
+        
+        // Add event listener for form submission
+        form.addEventListener('submit', function(e) {
+            updateCategoryValue(); // Ensure category value is updated before submission
+        });
+    });
 </script>
 @endsection
