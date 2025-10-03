@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda - LittleStar Studio')
+@section('title', \App\Models\WebsiteSetting::getValue('home_title', 'Beranda') . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('styles')
 <style>
@@ -104,7 +104,36 @@
     .portfolio-card-body p {
         color: #666;
         font-size: 0.9rem;
-        margin-bottom: 0;
+        margin-bottom: 15px;
+    }
+    
+    .portfolio-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .category-tag, .client-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    
+    .category-tag {
+        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+        color: #0277bd;
+        border: 1px solid #81d4fa;
+    }
+    
+    .client-tag {
+        background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        color: #7b1fa2;
+        border: 1px solid #ce93d8;
     }
     .badge-category {
         position: absolute;
@@ -112,10 +141,22 @@
         right: 15px;
         background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.8rem;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 15px rgba(0, 0, 153, 0.3);
+        z-index: 3;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .portfolio-card:hover .badge-category {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 153, 0.4);
     }
     
     .text-gradient {
@@ -191,6 +232,19 @@
             display: block;
             margin: 0.5rem 0;
         }
+        
+        .portfolio-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        
+        .badge-category {
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            font-size: 0.7rem;
+        }
     }
 </style>
 @endsection
@@ -200,7 +254,7 @@
 <div class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1><i class="fas fa-star"></i> LittleStar Studio</h1>
+            <h1><i class="fas fa-star"></i> {{ \App\Models\WebsiteSetting::getValue('home_header', 'LittleStar Studio') }}</h1>
             <p class="lead">Menciptakan Karya Digital yang Menginspirasi</p>
             <div class="hero-buttons">
                 <a href="#portfolio-preview" class="btn btn-hero btn-hero-primary">
@@ -238,6 +292,18 @@
                                 <div class="portfolio-card-body">
                                     <h5 class="text-dark">{{ $portfolio->title }}</h5>
                                     <p>{{ Str::limit($portfolio->description, 80) }}</p>
+                                    <div class="portfolio-meta">
+                                        @if($portfolio->category)
+                                            <span class="category-tag">
+                                                <i class="fas fa-tag me-1"></i>{{ $portfolio->category }}
+                                            </span>
+                                        @endif
+                                        @if($portfolio->client)
+                                            <span class="client-tag">
+                                                <i class="fas fa-user me-1"></i>{{ $portfolio->client }}
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </a>

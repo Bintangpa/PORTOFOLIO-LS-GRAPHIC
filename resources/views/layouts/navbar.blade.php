@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-fluid px-4">
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}" style="height: 75px; margin-left: -8px;">
-            <img src="{{ asset('images/logo-ls-biru.png') }}" alt="LittleStar Studio" class="me-2" style="height: 85px; width: auto; position: relative; z-index: 10;"> LittleStar Studio
+            <img src="{{ asset('images/logo-ls-biru.png') }}" alt="{{ \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio') }}" class="me-2" style="height: 85px; width: auto; position: relative; z-index: 10;"> {{ \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $portfolio->title . ' - LittleStar Studio')
+@section('title', $portfolio->title . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('styles')
 <style>

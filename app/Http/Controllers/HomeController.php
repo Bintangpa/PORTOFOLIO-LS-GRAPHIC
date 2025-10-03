@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // For homepage, get only 5 latest portfolios
-        $portfolios = Portfolio::latest()->take(5)->get();
+        // For homepage, get only 3 latest portfolios
+        $portfolios = Portfolio::latest()->take(3)->get();
         
         return view('home', compact('portfolios'));
     }
@@ -30,8 +30,13 @@ class HomeController extends Controller
             });
         }
         
+        // Handle category filter
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+        
         // Get all portfolios with pagination
-        $portfolios = $query->latest()->paginate(12);
+        $portfolios = $query->latest()->paginate(12)->withQueryString();
         
         return view('portfolio', compact('portfolios'));
     }

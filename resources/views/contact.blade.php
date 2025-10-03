@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak Kami - LittleStar Studio')
+@section('title', \App\Models\WebsiteSetting::getValue('contact_title', 'Kontak Kami') . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('content')
 <div class="container">
@@ -9,10 +9,10 @@
         <div class="row mb-5">
             <div class="col-12 text-center">
                 <h1 class="display-4 fw-bold mb-4">
-                    <span class="text-gradient">Hubungi</span> Kami
+                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('contact_header', 'Hubungi Kami') }}</span>
                 </h1>
                 <p class="lead text-muted mb-0">
-                    Siap membantu mewujudkan ide kreatif Anda. Mari berkolaborasi!
+                    {{ \App\Models\WebsiteSetting::getValue('contact_subtitle', 'Siap membantu mewujudkan ide kreatif Anda. Mari berkolaborasi!') }}
                 </p>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <a href="https://wa.me/6281234567890?text=Halo%20LittleStar%20Studio,%20saya%20tertarik%20dengan%20layanan%20Anda" 
+                            <a href="https://wa.me/{{ str_replace(['+', '-', ' '], '', \App\Models\ContactSetting::getValue('contact_whatsapp', '6281234567890')) }}?text=Halo%20{{ \App\Models\ContactSetting::getValue('company_name', 'LittleStar Studio') }},%20saya%20tertarik%20dengan%20layanan%20Anda" 
                                target="_blank" class="social-contact-card whatsapp-card">
                                 <div class="social-contact-icon">
                                     <i class="fab fa-whatsapp"></i>
@@ -57,7 +57,7 @@
                         </div>
                         
                         <div class="col-md-6 mb-4">
-                            <a href="https://instagram.com/littlestarstudio" 
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_instagram', 'https://instagram.com/littlestarstudio') }}" 
                                target="_blank" class="social-contact-card instagram-card">
                                 <div class="social-contact-icon">
                                     <i class="fab fa-instagram"></i>
@@ -92,19 +92,7 @@
                         Informasi Kontak
                     </h3>
                     
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h5 class="fw-semibold mb-1">Alamat</h5>
-                            <p class="text-muted mb-0">
-                                Jl. Kreatif No. 123<br>
-                                Jakarta Selatan, 12345<br>
-                                Indonesia
-                            </p>
-                        </div>
-                    </div>
+
 
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -113,8 +101,8 @@
                         <div class="contact-details">
                             <h5 class="fw-semibold mb-1">Telepon</h5>
                             <p class="text-muted mb-0">
-                                <a href="tel:+6281234567890" class="text-decoration-none">
-                                    +62 812-3456-7890
+                                <a href="tel:{{ \App\Models\ContactSetting::getValue('contact_phone', '+6281234567890') }}" class="text-decoration-none">
+                                    {{ \App\Models\ContactSetting::getValue('contact_phone', '+62 812-3456-7890') }}
                                 </a>
                             </p>
                         </div>
@@ -127,8 +115,8 @@
                         <div class="contact-details">
                             <h5 class="fw-semibold mb-1">Email</h5>
                             <p class="text-muted mb-0">
-                                <a href="mailto:hello@littlestarstudio.com" class="text-decoration-none">
-                                    hello@littlestarstudio.com
+                                <a href="mailto:{{ \App\Models\ContactSetting::getValue('contact_email', 'hello@littlestarstudio.com') }}" class="text-decoration-none">
+                                    {{ \App\Models\ContactSetting::getValue('contact_email', 'hello@littlestarstudio.com') }}
                                 </a>
                             </p>
                         </div>
@@ -141,9 +129,7 @@
                         <div class="contact-details">
                             <h5 class="fw-semibold mb-1">Jam Operasional</h5>
                             <p class="text-muted mb-0">
-                                Senin - Jumat: 09:00 - 18:00<br>
-                                Sabtu: 09:00 - 15:00<br>
-                                Minggu: Tutup
+                                {!! nl2br(e(\App\Models\ContactSetting::getValue('operating_hours', 'Senin - Jumat: 09:00 - 18:00\nSabtu: 09:00 - 15:00\nMinggu: Tutup'))) !!}
                             </p>
                         </div>
                     </div>
@@ -152,21 +138,36 @@
                     <div class="social-media mt-4">
                         <h5 class="fw-semibold mb-3">Ikuti Kami</h5>
                         <div class="d-flex gap-3">
-                            <a href="#" class="social-link">
+                            @if(\App\Models\ContactSetting::getValue('social_instagram'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_instagram') }}" target="_blank" class="social-link">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            @endif
+                            @if(\App\Models\ContactSetting::getValue('social_facebook'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_facebook') }}" target="_blank" class="social-link">
                                 <i class="fab fa-facebook"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            @endif
+                            @if(\App\Models\ContactSetting::getValue('social_twitter'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_twitter') }}" target="_blank" class="social-link">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            @endif
+                            @if(\App\Models\ContactSetting::getValue('social_linkedin'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_linkedin') }}" target="_blank" class="social-link">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            @endif
+                            @if(\App\Models\ContactSetting::getValue('social_youtube'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_youtube') }}" target="_blank" class="social-link">
                                 <i class="fab fa-youtube"></i>
                             </a>
+                            @endif
+                            @if(\App\Models\ContactSetting::getValue('social_tiktok'))
+                            <a href="{{ \App\Models\ContactSetting::getValue('social_tiktok') }}" target="_blank" class="social-link">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>

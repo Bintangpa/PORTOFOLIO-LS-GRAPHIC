@@ -5,12 +5,42 @@
 
 @section('styles')
 <style>
-    .portfolio-table img {
-        width: 80px;
+    .table-container {
+        overflow: visible;
+        width: 100%;
+    }
+    
+    .portfolio-table {
+        font-size: 0.9rem;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    .portfolio-table td {
+        padding: 12px 8px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow: hidden;
         height: 80px;
+    }
+    
+    .portfolio-table tr {
+        height: 80px;
+    }
+    
+    .portfolio-table th {
+        padding: 12px 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .portfolio-table img {
+        width: 60px;
+        height: 60px;
         object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
     }
     
@@ -23,12 +53,15 @@
         display: flex;
         gap: 8px;
         justify-content: center;
+        align-items: center;
+        height: auto;
+        padding: 0;
     }
     
     .action-buttons .btn {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        border-radius: 6px;
         transition: all 0.3s ease;
         border: none;
         font-weight: 600;
@@ -138,24 +171,26 @@
     }
     
     .portfolio-title {
-        font-weight: 700;
+        font-weight: 600;
         color: #000099;
-        margin-bottom: 5px;
-        font-size: 1.1rem;
+        margin-bottom: 3px;
+        font-size: 0.95rem;
+        line-height: 1.3;
     }
     
     .portfolio-description {
         color: #6b7280;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         margin-bottom: 0;
+        line-height: 1.4;
     }
     
     .category-badge {
         background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
         color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
+        padding: 3px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
         font-weight: 600;
         border: none;
     }
@@ -163,9 +198,9 @@
     .date-badge {
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         color: #374151;
-        padding: 4px 12px;
-        border-radius: 15px;
-        font-size: 0.85rem;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
         font-weight: 500;
         border: 1px solid #e2e8f0;
     }
@@ -439,6 +474,54 @@
         .action-buttons {
             flex-direction: column;
         }
+        
+        .portfolio-table {
+            font-size: 0.8rem;
+        }
+        
+        .portfolio-table td {
+            padding: 8px 4px;
+            height: 65px;
+        }
+        
+        .portfolio-table tr {
+            height: 65px;
+        }
+        
+        .portfolio-table th {
+            padding: 8px 4px;
+            font-size: 0.8rem;
+        }
+        
+        .portfolio-table th:nth-child(1) { width: 60px !important; }
+        .portfolio-table th:nth-child(2) { width: 40% !important; }
+        .portfolio-table th:nth-child(3) { width: 15% !important; }
+        .portfolio-table th:nth-child(4) { width: 15% !important; }
+        .portfolio-table th:nth-child(5) { width: 12% !important; }
+        .portfolio-table th:nth-child(6) { width: 100px !important; }
+        
+        .portfolio-table img {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .portfolio-title {
+            font-size: 0.85rem;
+        }
+        
+        .portfolio-description {
+            font-size: 0.75rem;
+        }
+        
+        .action-buttons {
+            height: auto;
+            padding: 0;
+        }
+        
+        .action-buttons .btn {
+            padding: 4px 8px;
+            font-size: 0.75rem;
+        }
     }
 </style>
 @endsection
@@ -475,16 +558,16 @@
 <div class="card">
     <div class="card-body">
         @if($portfolios->count() > 0)
-            <div class="table-responsive">
+            <div class="table-container">
                 <table class="table table-hover portfolio-table">
                     <thead>
                         <tr>
-                            <th>Gambar</th>
-                            <th>Judul</th>
-                            <th>Kategori</th>
-                            <th>Klien</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
+                            <th style="width: 80px;">Gambar</th>
+                            <th style="width: 35%;">Judul</th>
+                            <th style="width: 15%;">Kategori</th>
+                            <th style="width: 15%;">Klien</th>
+                            <th style="width: 12%;">Tanggal</th>
+                            <th style="width: 120px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -505,7 +588,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="fw-semibold text-dark">{{ $portfolio->client ?? '-' }}</span>
+                                    <span class="fw-semibold text-dark" style="font-size: 0.85rem;">{{ $portfolio->client ?? '-' }}</span>
                                 </td>
                                 <td>
                                     @if($portfolio->project_date)
@@ -514,18 +597,20 @@
                                         <span class="text-muted">-</span>
                                     @endif
                                 </td>
-                                <td class="action-buttons">
-                                    <a href="{{ route('admin.portfolios.show', $portfolio) }}" class="btn btn-sm btn-info" title="Lihat">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('admin.portfolios.edit', $portfolio) }}" class="btn btn-sm btn-warning" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <button type="button" class="btn btn-sm btn-danger" 
-                                            onclick="showDeleteConfirm({{ $portfolio->id }}, '{{ addslashes($portfolio->title) }}')" 
-                                            title="Hapus">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ route('admin.portfolios.show', $portfolio) }}" class="btn btn-sm btn-info" title="Lihat">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.portfolios.edit', $portfolio) }}" class="btn btn-sm btn-warning" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger" 
+                                                onclick="showDeleteConfirm({{ $portfolio->id }}, '{{ addslashes($portfolio->title) }}')" 
+                                                title="Hapus">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

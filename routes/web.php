@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\WebsiteController;
 
 
 
@@ -28,6 +30,14 @@ Auth::routes();
 // Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('portfolios', PortfolioController::class);
+    
+    // Contact Control Routes
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::put('/contact', [ContactController::class, 'update'])->name('contact.update');
+    
+    // Website Settings Routes
+    Route::get('/website', [WebsiteController::class, 'index'])->name('website.index');
+    Route::put('/website', [WebsiteController::class, 'update'])->name('website.update');
 });
 
 // Dashboard redirect

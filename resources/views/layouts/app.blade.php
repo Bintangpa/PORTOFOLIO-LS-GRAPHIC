@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'LittleStar Studio - Portfolio')</title>
+    <title>@yield('title', \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio') . ' - Portfolio')</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -264,7 +264,7 @@
             <div class="loading-logo">
                 <img src="{{ asset('images/logo-ls.png') }}" alt="LittleStar Logo">
             </div>
-            <div class="loading-text">LITTLESTAR STUDIO</div>
+            <div class="loading-text">{{ \App\Models\WebsiteSetting::getValue('loading_text', 'LITTLESTAR STUDIO') }}</div>
             <div class="loading-spinner"></div>
             <div class="loading-dots">
                 <div class="loading-dot"></div>

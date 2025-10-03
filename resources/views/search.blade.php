@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pencarian Portfolio - LittleStar Studio')
+@section('title', 'Pencarian Portfolio - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('content')
 <div class="container">

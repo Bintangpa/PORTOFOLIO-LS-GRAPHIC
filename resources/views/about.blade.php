@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - LittleStar Studio')
+@section('title', \App\Models\WebsiteSetting::getValue('about_title', 'Tentang Kami') . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
         <div class="row align-items-center mb-5">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">
-                    <span class="text-gradient">Tentang</span> LittleStar Studio
+                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('about_header', 'Tentang LittleStar Studio') }}</span>
                 </h1>
                 <p class="lead text-muted mb-4">
                     Kami adalah studio kreatif yang berdedikasi untuk menciptakan karya-karya digital yang menginspirasi dan memberikan dampak positif bagi klien dan masyarakat.
