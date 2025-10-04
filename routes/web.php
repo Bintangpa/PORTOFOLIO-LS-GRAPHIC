@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\Admin\AboutController;
 
 
 
@@ -38,6 +39,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Website Settings Routes
     Route::get('/website', [WebsiteController::class, 'index'])->name('website.index');
     Route::put('/website', [WebsiteController::class, 'update'])->name('website.update');
+    
+    // About Page Management Routes
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+    Route::post('/about', [AboutController::class, 'update'])->name('about.update');
 });
 
 // Dashboard redirect

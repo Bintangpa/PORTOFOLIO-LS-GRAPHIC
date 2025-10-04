@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Portfolio - Admin')
+@section('title', 'Kelola Portofolio - Admin')
 @section('page-title', 'Dashboard Admin')
 
 @section('styles')
@@ -48,6 +48,15 @@
         transform: scale(1.1);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
+    
+    .portfolio-number {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #374151;
+        text-align: center;
+    }
+    
+
     
     .action-buttons {
         display: flex;
@@ -116,12 +125,12 @@
     
     .stats-card p {
         margin: 0;
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: 0.85rem;
+        font-weight: 500;
         position: relative;
         z-index: 2;
-        opacity: 0.95;
-        letter-spacing: 1px;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
     }
     
     .stats-icon {
@@ -493,12 +502,13 @@
             font-size: 0.8rem;
         }
         
-        .portfolio-table th:nth-child(1) { width: 60px !important; }
-        .portfolio-table th:nth-child(2) { width: 40% !important; }
-        .portfolio-table th:nth-child(3) { width: 15% !important; }
+        .portfolio-table th:nth-child(1) { width: 40px !important; }
+        .portfolio-table th:nth-child(2) { width: 60px !important; }
+        .portfolio-table th:nth-child(3) { width: 35% !important; }
         .portfolio-table th:nth-child(4) { width: 15% !important; }
-        .portfolio-table th:nth-child(5) { width: 12% !important; }
-        .portfolio-table th:nth-child(6) { width: 100px !important; }
+        .portfolio-table th:nth-child(5) { width: 15% !important; }
+        .portfolio-table th:nth-child(6) { width: 12% !important; }
+        .portfolio-table th:nth-child(7) { width: 100px !important; }
         
         .portfolio-table img {
             width: 45px;
@@ -522,38 +532,201 @@
             padding: 4px 8px;
             font-size: 0.75rem;
         }
+        
+        .portfolio-number {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Mobile pagination adjustments */
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            min-width: 90px;
+            padding: 0 15px;
+            font-size: 0.8rem;
+        }
+        
+        .pagination .page-link {
+            width: 35px;
+            height: 35px;
+            font-size: 0.8rem;
+        }
+        
+        .pagination-container {
+            padding: 20px;
+            margin-top: 1.5rem;
+        }
+        
+        .pagination-info {
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            padding: 8px 15px;
+        }
+    }
+    
+    /* Custom Pagination Styles */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .pagination .page-item {
+        margin: 0;
+    }
+    
+    .pagination .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid #000099;
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 153, 0.3);
+    }
+    
+    .pagination .page-link:hover {
+        background: linear-gradient(135deg, #0000cc 0%, #000099 100%);
+        border-color: #0000cc;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 153, 0.5);
+    }
+    
+    .pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+        border: 3px solid #ffd700;
+        color: #000;
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7), 0 0 0 3px rgba(255, 215, 0, 0.3);
+        font-weight: 800;
+        transform: scale(1.15);
+        position: relative;
+        z-index: 10;
+    }
+    
+    .pagination .page-item.active .page-link::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ffd700, #ffb347, #ffd700);
+        border-radius: 50%;
+        z-index: -1;
+        animation: activePagePulseAdmin 2s ease-in-out infinite;
+    }
+    
+    @keyframes activePagePulseAdmin {
+        0%, 100% {
+            opacity: 0.6;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+    }
+    
+    /* Prevent hover effects on active page */
+    .pagination .page-item.active .page-link:hover {
+        background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+        border: 3px solid #ffd700;
+        color: #000;
+        transform: scale(1.15);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7), 0 0 0 3px rgba(255, 215, 0, 0.3);
+    }
+    
+    .pagination .page-item.disabled .page-link {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border-color: #6c757d;
+        color: rgba(255, 255, 255, 0.4);
+        cursor: not-allowed;
+        opacity: 0.5;
+        box-shadow: none;
+    }
+    
+    .pagination .page-item.disabled .page-link:hover {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border-color: #6c757d;
+        color: rgba(255, 255, 255, 0.4);
+        transform: none;
+        box-shadow: none;
+        opacity: 0.5;
+    }
+    
+    /* Previous/Next buttons - target by content */
+    .pagination .page-link:has(i.fa-chevron-left),
+    .pagination .page-link:has(i.fa-chevron-right),
+    .pagination .page-item:first-child .page-link,
+    .pagination .page-item:last-child .page-link {
+        width: auto;
+        min-width: 140px;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: auto;
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+        border-color: #000099;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 153, 0.3);
+    }
+    
+    .pagination .page-item:first-child .page-link:hover,
+    .pagination .page-item:last-child .page-link:hover {
+        background: linear-gradient(135deg, #0000cc 0%, #000099 100%);
+        border-color: #0000cc;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 153, 0.5);
+    }
+    
+    /* Remove auto-generated icons since we're using custom pagination */
+    
+    /* Improve pagination container */
+    .pagination-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Pagination info */
+    .pagination-info {
+        text-align: center;
+        margin-top: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 10px 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 </style>
 @endsection
 
 @section('content')
-
-<!-- Statistics -->
-<div class="stats-grid">
-    <div class="stats-card">
-        <div class="stats-icon">
-            <i class="fas fa-images"></i>
-        </div>
-        <h3>{{ $portfolios->total() }}</h3>
-        <p>Total Portfolio</p>
-    </div>
-    
-    <div class="stats-card">
-        <div class="stats-icon">
-            <i class="fas fa-eye"></i>
-        </div>
-        <h3>{{ number_format($portfolios->total() * 150) }}</h3>
-        <p>Total Views</p>
-    </div>
-    
-    <div class="stats-card">
-        <div class="stats-icon">
-            <i class="fas fa-calendar"></i>
-        </div>
-        <h3>{{ $portfolios->where('created_at', '>=', now()->startOfMonth())->count() }}</h3>
-        <p>Bulan Ini</p>
-    </div>
-</div>
 
 <div class="card">
     <div class="card-body">
@@ -562,8 +735,9 @@
                 <table class="table table-hover portfolio-table">
                     <thead>
                         <tr>
+                            <th style="width: 50px;">No.</th>
                             <th style="width: 80px;">Gambar</th>
-                            <th style="width: 35%;">Judul</th>
+                            <th style="width: 30%;">Judul</th>
                             <th style="width: 15%;">Kategori</th>
                             <th style="width: 15%;">Klien</th>
                             <th style="width: 12%;">Tanggal</th>
@@ -571,8 +745,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($portfolios as $portfolio)
+                        @foreach($portfolios as $index => $portfolio)
                             <tr>
+                                <td>
+                                    <span class="portfolio-number">{{ ($portfolios->currentPage() - 1) * $portfolios->perPage() + $index + 1 }}</span>
+                                </td>
                                 <td>
                                     <img src="{{ asset('storage/' . $portfolio->image_path) }}" alt="{{ $portfolio->title }}">
                                 </td>
@@ -618,16 +795,23 @@
                 </table>
             </div>
             
-            <div class="d-flex justify-content-center mt-4">
-                {{ $portfolios->links() }}
-            </div>
+            @if($portfolios->hasPages())
+                <div class="pagination-container">
+                    <div class="d-flex justify-content-center">
+                        {{ $portfolios->links('custom.admin-pagination') }}
+                    </div>
+                    <div class="pagination-info">
+                        Menampilkan {{ $portfolios->firstItem() }} - {{ $portfolios->lastItem() }} dari {{ $portfolios->total() }} portofolio
+                    </div>
+                </div>
+            @endif
         @else
             <div class="empty-state">
                 <i class="fas fa-folder-open fa-5x"></i>
-                <h4>Belum ada portfolio</h4>
-                <p>Mulai showcase karya terbaik Anda dengan menambahkan portfolio pertama</p>
+                <h4>Belum ada portofolio</h4>
+                <p>Mulai showcase karya terbaik Anda dengan menambahkan portofolio pertama</p>
                 <a href="{{ route('admin.portfolios.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus me-2"></i>Tambah Portfolio Pertama
+                    <i class="fas fa-plus me-2"></i>Tambah Portofolio Pertama
                 </a>
             </div>
         @endif
@@ -642,11 +826,11 @@
                 <div class="delete-icon">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
-                <h3>Konfirmasi Hapus Portfolio</h3>
+                <h3>Konfirmasi Hapus Portofolio</h3>
             </div>
             
             <div class="delete-modal-body">
-                <p class="delete-message">Apakah Anda yakin ingin menghapus portfolio ini?</p>
+                <p class="delete-message">Apakah Anda yakin ingin menghapus portofolio ini?</p>
                 <div class="portfolio-info">
                     <strong id="portfolioNameToDelete"></strong>
                 </div>

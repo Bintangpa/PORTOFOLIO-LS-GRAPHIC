@@ -258,7 +258,7 @@
             <p class="lead">Menciptakan Karya Digital yang Menginspirasi</p>
             <div class="hero-buttons">
                 <a href="#portfolio-preview" class="btn btn-hero btn-hero-primary">
-                    <i class="fas fa-briefcase me-2"></i>Lihat Portfolio
+                    <i class="fas fa-briefcase me-2"></i>Lihat Portofolio
                 </a>
                 <a href="{{ route('contact') }}" class="btn btn-hero btn-hero-outline">
                     <i class="fas fa-envelope me-2"></i>Hubungi Kami
@@ -270,10 +270,10 @@
 
 <div class="container mb-5">
 
-    <!-- Portfolio Preview Section -->
+    <!-- Portofolio Preview Section -->
     <div class="content-wrapper" id="portfolio-preview">
         <div class="section-title">
-            <h2><span class="text-gradient">Portfolio</span> Terbaru</h2>
+            <h2><span class="text-gradient">Portofolio</span> Terbaru</h2>
             <p>Lihat beberapa karya terbaru kami yang telah berhasil membantu klien mencapai tujuan mereka</p>
         </div>
         
@@ -313,14 +313,14 @@
             
             <div class="text-center mt-4">
                 <a href="{{ route('portfolio') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-th me-2"></i>Lihat Semua Portfolio
+                    <i class="fas fa-th me-2"></i>Lihat Semua Portofolio
                 </a>
             </div>
         @else
             <div class="text-center py-5">
                 <i class="fas fa-folder-open fa-5x text-muted mb-3"></i>
-                <h4 class="text-muted">Belum ada portfolio</h4>
-                <p class="text-muted">Portfolio akan segera ditampilkan di sini</p>
+                <h4 class="text-muted">Belum ada portofolio</h4>
+                <p class="text-muted">Portofolio akan segera ditampilkan di sini</p>
             </div>
         @endif
     </div>

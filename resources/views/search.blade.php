@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pencarian Portfolio - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
+@section('title', 'Pencarian Portofolio - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio'))
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
             <div class="col-lg-6">
                 <h1 class="search-title">
                     <i class="fas fa-search me-2"></i>
-                    <span class="text-gradient">Pencarian</span> Portfolio
+                    <span class="text-gradient">Pencarian</span> Portofolio
                 </h1>
                 <p class="text-muted mb-0">
                     Temukan desain yang sesuai dengan kebutuhan Anda
@@ -23,7 +23,7 @@
                         </span>
                     @else
                         <span class="badge bg-secondary fs-6">
-                            {{ $portfolios->total() }} total portfolio
+                            {{ $portfolios->total() }} total portofolio
                         </span>
                     @endif
                 </div>
@@ -310,12 +310,17 @@
 
 .portfolio-image {
     position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
     overflow: hidden;
 }
 
 .portfolio-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }

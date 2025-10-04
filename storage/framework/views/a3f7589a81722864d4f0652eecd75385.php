@@ -1,0 +1,351 @@
+
+
+<?php $__env->startSection('title', \App\Models\WebsiteSetting::getValue('home_title', 'Beranda') . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio')); ?>
+
+<?php $__env->startSection('styles'); ?>
+<style>
+    .hero-section {
+        text-align: center;
+        color: white;
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.1"><polygon points="1000,100 1000,0 0,100"/></svg>') no-repeat bottom;
+        background-size: cover;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-section h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        background: linear-gradient(45deg, #ffffff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    .hero-buttons {
+        animation: fadeInUp 1s ease-out 0.4s both;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .portfolio-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        background: white;
+        margin-bottom: 30px;
+    }
+    .portfolio-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    
+    .portfolio-image-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+    
+    .portfolio-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+    .portfolio-card:hover img {
+        transform: scale(1.1);
+    }
+    .portfolio-card-body {
+        padding: 20px;
+    }
+    .portfolio-card-body h5 {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .portfolio-card-body p {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .portfolio-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .category-tag, .client-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    
+    .category-tag {
+        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+        color: #0277bd;
+        border: 1px solid #81d4fa;
+    }
+    
+    .client-tag {
+        background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        color: #7b1fa2;
+        border: 1px solid #ce93d8;
+    }
+    .badge-category {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 15px rgba(0, 0, 153, 0.3);
+        z-index: 3;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .portfolio-card:hover .badge-category {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 153, 0.4);
+    }
+    
+    .text-gradient {
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .btn-hero {
+        padding: 1rem 2rem;
+        font-weight: 600;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        margin: 0 0.5rem;
+    }
+    
+    .btn-hero-primary {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        backdrop-filter: blur(10px);
+    }
+    
+    .btn-hero-primary:hover {
+        background: white;
+        color: #000099;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-hero-outline {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: white;
+    }
+    
+    .btn-hero-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: white;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .section-title p {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-section .lead {
+            font-size: 1.2rem;
+        }
+        
+        .btn-hero {
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .portfolio-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        
+        .badge-category {
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            font-size: 0.7rem;
+        }
+    }
+</style>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1><i class="fas fa-star"></i> <?php echo e(\App\Models\WebsiteSetting::getValue('home_header', 'LittleStar Studio')); ?></h1>
+            <p class="lead">Menciptakan Karya Digital yang Menginspirasi</p>
+            <div class="hero-buttons">
+                <a href="#portfolio-preview" class="btn btn-hero btn-hero-primary">
+                    <i class="fas fa-briefcase me-2"></i>Lihat Portofolio
+                </a>
+                <a href="<?php echo e(route('contact')); ?>" class="btn btn-hero btn-hero-outline">
+                    <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+
+    <!-- Portofolio Preview Section -->
+    <div class="content-wrapper" id="portfolio-preview">
+        <div class="section-title">
+            <h2><span class="text-gradient">Portofolio</span> Terbaru</h2>
+            <p>Lihat beberapa karya terbaru kami yang telah berhasil membantu klien mencapai tujuan mereka</p>
+        </div>
+        
+        <?php if($portfolios->count() > 0): ?>
+            <div class="row">
+                <?php $__currentLoopData = $portfolios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $portfolio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="<?php echo e(route('portfolio.show', $portfolio)); ?>" class="text-decoration-none">
+                            <div class="portfolio-card">
+                                <?php if($portfolio->category): ?>
+                                    <span class="badge-category"><?php echo e($portfolio->category); ?></span>
+                                <?php endif; ?>
+                                <div class="portfolio-image-container">
+                                    <img src="<?php echo e(asset('storage/' . $portfolio->image_path)); ?>" alt="<?php echo e($portfolio->title); ?>">
+                                </div>
+                                <div class="portfolio-card-body">
+                                    <h5 class="text-dark"><?php echo e($portfolio->title); ?></h5>
+                                    <p><?php echo e(Str::limit($portfolio->description, 80)); ?></p>
+                                    <div class="portfolio-meta">
+                                        <?php if($portfolio->category): ?>
+                                            <span class="category-tag">
+                                                <i class="fas fa-tag me-1"></i><?php echo e($portfolio->category); ?>
+
+                                            </span>
+                                        <?php endif; ?>
+                                        <?php if($portfolio->client): ?>
+                                            <span class="client-tag">
+                                                <i class="fas fa-user me-1"></i><?php echo e($portfolio->client); ?>
+
+                                            </span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="<?php echo e(route('portfolio')); ?>" class="btn btn-primary btn-lg">
+                    <i class="fas fa-th me-2"></i>Lihat Semua Portofolio
+                </a>
+            </div>
+        <?php else: ?>
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-5x text-muted mb-3"></i>
+                <h4 class="text-muted">Belum ada portofolio</h4>
+                <p class="text-muted">Portofolio akan segera ditampilkan di sini</p>
+            </div>
+        <?php endif; ?>
+    </div>
+    
+    <!-- Call to Action Section -->
+    <div class="content-wrapper mt-5">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h3 class="fw-bold mb-3">
+                    <span class="text-gradient">Siap Memulai</span> Proyek Anda?
+                </h3>
+                <p class="text-muted mb-0">
+                    Mari berkolaborasi untuk mewujudkan ide kreatif Anda menjadi kenyataan. 
+                    Hubungi kami untuk konsultasi gratis!
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <a href="<?php echo e(route('contact')); ?>" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket me-2"></i>Mulai Sekarang
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/home.blade.php ENDPATH**/ ?>

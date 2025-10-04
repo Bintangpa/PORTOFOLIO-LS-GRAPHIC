@@ -12,14 +12,14 @@ Website Settings adalah panel kontrol khusus untuk mengatur semua aspek branding
 
 ### 📄 **Judul Halaman (Browser Tab)**
 - **Judul Halaman Beranda**: Title di tab browser untuk halaman beranda
-- **Judul Halaman Portfolio**: Title di tab browser untuk halaman portfolio
+- **Judul Halaman Portofolio**: Title di tab browser untuk halaman portofolio
 - **Judul Halaman About**: Title di tab browser untuk halaman tentang
 - **Judul Halaman Kontak**: Title di tab browser untuk halaman kontak
 
 ### 📝 **Header Halaman**
 - **Header Halaman Beranda**: Judul besar di halaman beranda
-- **Header Halaman Portfolio**: Judul besar di halaman portfolio
-- **Subtitle Portfolio**: Subtitle yang muncul di bawah header portfolio
+- **Header Halaman Portofolio**: Judul besar di halaman portofolio
+- **Subtitle Portofolio**: Subtitle yang muncul di bawah header portofolio
 - **Header Halaman About**: Judul besar di halaman tentang
 - **Header Halaman Kontak**: Judul besar di halaman kontak
 - **Subtitle Kontak**: Subtitle yang muncul di bawah header kontak
@@ -66,11 +66,11 @@ Website Settings adalah panel kontrol khusus untuk mengatur semua aspek branding
 ### ✅ **Wajib**
 - Nama Website
 - Judul Halaman Beranda
-- Judul Halaman Portfolio
+- Judul Halaman Portofolio
 - Judul Halaman About
 - Judul Halaman Kontak
 - Header Halaman Beranda
-- Header Halaman Portfolio
+- Header Halaman Portofolio
 - Header Halaman About
 - Header Halaman Kontak
 - Copyright Footer
@@ -81,7 +81,7 @@ Website Settings adalah panel kontrol khusus untuk mengatur semua aspek branding
 ### 📝 **Opsional**
 - Tagline Website
 - Deskripsi Website
-- Subtitle Portfolio
+- Subtitle Portofolio
 - Subtitle Kontak
 
 ## Dampak Perubahan

@@ -250,10 +250,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Judul Halaman Portfolio</label>
+                            <label class="form-label">Judul Halaman Portofolio</label>
                             <input type="text" name="settings[portfolio_title]" class="form-control" 
                                    value="{{ $settings['portfolio_title'] }}" required>
-                            <div class="form-text">Muncul di tab browser halaman portfolio</div>
+                            <div class="form-text">Muncul di tab browser halaman portofolio</div>
                         </div>
                     </div>
                 </div>
@@ -298,18 +298,18 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Header Halaman Portfolio</label>
+                            <label class="form-label">Header Halaman Portofolio</label>
                             <input type="text" name="settings[portfolio_header]" class="form-control" 
                                    value="{{ $settings['portfolio_header'] }}" required>
-                            <div class="form-text">Judul besar di halaman portfolio</div>
+                            <div class="form-text">Judul besar di halaman portofolio</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Subtitle Portfolio</label>
+                    <label class="form-label">Subtitle Portofolio</label>
                     <textarea name="settings[portfolio_subtitle]" class="form-control" rows="2">{{ $settings['portfolio_subtitle'] }}</textarea>
-                    <div class="form-text">Subtitle yang muncul di bawah header portfolio</div>
+                    <div class="form-text">Subtitle yang muncul di bawah header portofolio</div>
                 </div>
 
                 <div class="row">

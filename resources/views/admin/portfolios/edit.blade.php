@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Portfolio - Admin')
+@section('title', 'Edit Portofolio - Admin')
 @section('page-title', 'Dashboard Admin')
 
 @section('styles')
@@ -79,7 +79,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-edit"></i> Edit Portfolio: {{ $portfolio->title }}
+                <i class="fas fa-edit"></i> Edit Portofolio: {{ $portfolio->title }}
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.portfolios.update', $portfolio) }}" method="POST" enctype="multipart/form-data">
@@ -89,7 +89,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="mb-3">
-                                <label for="title" class="form-label">Judul Portfolio <span class="text-danger">*</span></label>
+                                <label for="title" class="form-label">Judul Portofolio <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" 
                                        id="title" name="title" value="{{ old('title', $portfolio->title) }}" 
                                        placeholder="Contoh: Logo Design untuk Brand ABC" required>
@@ -165,7 +165,7 @@
                         
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label">Gambar Portfolio Saat Ini</label>
+                                <label class="form-label">Gambar Portofolio Saat Ini</label>
                                 <div class="current-image">
                                     <img src="{{ asset('storage/' . $portfolio->image_path) }}" 
                                          class="preview-image" id="currentImage" alt="{{ $portfolio->title }}">
@@ -203,7 +203,7 @@
                             <i class="fas fa-arrow-left"></i> Kembali
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Update Portfolio
+                            <i class="fas fa-save"></i> Update Portofolio
                         </button>
                     </div>
                 </form>

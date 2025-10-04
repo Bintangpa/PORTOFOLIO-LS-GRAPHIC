@@ -9,17 +9,17 @@
         <div class="row align-items-center mb-5">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">
-                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('about_header', 'Tentang LittleStar Studio') }}</span>
+                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('about_hero_title', 'Tentang LittleStar Studio') }}</span>
                 </h1>
                 <p class="lead text-muted mb-4">
-                    Kami adalah studio kreatif yang berdedikasi untuk menciptakan karya-karya digital yang menginspirasi dan memberikan dampak positif bagi klien dan masyarakat.
+                    {{ \App\Models\WebsiteSetting::getValue('about_hero_description', 'Kami adalah studio kreatif yang berdedikasi untuk menciptakan karya-karya digital yang menginspirasi dan memberikan dampak positif bagi klien dan masyarakat.') }}
                 </p>
                 <div class="d-flex gap-3">
                     <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>Hubungi Kami
                     </a>
                     <a href="{{ route('home') }}" class="btn btn-outline-primary btn-lg">
-                        <i class="fas fa-briefcase me-2"></i>Lihat Portfolio
+                        <i class="fas fa-briefcase me-2"></i>Lihat Portofolio
                     </a>
                 </div>
             </div>
@@ -37,10 +37,9 @@
                     <div class="card-icon">
                         <i class="fas fa-eye"></i>
                     </div>
-                    <h3 class="h4 fw-bold mb-3">Visi Kami</h3>
+                    <h3 class="h4 fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_vision_title', 'Visi Kami') }}</h3>
                     <p class="text-muted">
-                        Menjadi studio kreatif terdepan yang menghadirkan solusi digital inovatif dan berkualitas tinggi, 
-                        serta memberikan pengalaman luar biasa bagi setiap klien yang bekerja sama dengan kami.
+                        {{ \App\Models\WebsiteSetting::getValue('about_vision_content', 'Menjadi studio kreatif terdepan yang menghadirkan solusi digital inovatif dan berkualitas tinggi, serta memberikan pengalaman luar biasa bagi setiap klien yang bekerja sama dengan kami.') }}
                     </p>
                 </div>
             </div>
@@ -49,10 +48,9 @@
                     <div class="card-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h3 class="h4 fw-bold mb-3">Misi Kami</h3>
+                    <h3 class="h4 fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_mission_title', 'Misi Kami') }}</h3>
                     <p class="text-muted">
-                        Menciptakan karya-karya digital yang tidak hanya indah secara visual, tetapi juga fungsional 
-                        dan memberikan nilai tambah bagi bisnis klien melalui pendekatan yang kreatif dan profesional.
+                        {{ \App\Models\WebsiteSetting::getValue('about_mission_content', 'Menciptakan karya-karya digital yang tidak hanya indah secara visual, tetapi juga fungsional dan memberikan nilai tambah bagi bisnis klien melalui pendekatan yang kreatif dan profesional.') }}
                     </p>
                 </div>
             </div>
@@ -62,7 +60,7 @@
         <div class="row mb-5">
             <div class="col-12">
                 <h2 class="text-center mb-5">
-                    <span class="text-gradient">Nilai-Nilai</span> Kami
+                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('about_values_title', 'Nilai-Nilai Kami') }}</span>
                 </h2>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
@@ -70,9 +68,9 @@
                     <div class="value-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Kreativitas</h4>
+                    <h4 class="fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_value1_title', 'Kreativitas') }}</h4>
                     <p class="text-muted">
-                        Kami selalu mencari solusi kreatif dan inovatif untuk setiap tantangan yang dihadapi.
+                        {{ \App\Models\WebsiteSetting::getValue('about_value1_content', 'Kami selalu mencari solusi kreatif dan inovatif untuk setiap tantangan yang dihadapi.') }}
                     </p>
                 </div>
             </div>
@@ -81,9 +79,9 @@
                     <div class="value-icon">
                         <i class="fas fa-award"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Kualitas</h4>
+                    <h4 class="fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_value2_title', 'Kualitas') }}</h4>
                     <p class="text-muted">
-                        Setiap karya yang kami hasilkan selalu mengutamakan kualitas dan detail yang sempurna.
+                        {{ \App\Models\WebsiteSetting::getValue('about_value2_content', 'Setiap karya yang kami hasilkan selalu mengutamakan kualitas dan detail yang sempurna.') }}
                     </p>
                 </div>
             </div>
@@ -92,9 +90,9 @@
                     <div class="value-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Kolaborasi</h4>
+                    <h4 class="fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_value3_title', 'Kolaborasi') }}</h4>
                     <p class="text-muted">
-                        Kami percaya bahwa hasil terbaik lahir dari kolaborasi yang solid dengan klien.
+                        {{ \App\Models\WebsiteSetting::getValue('about_value3_content', 'Kami percaya bahwa hasil terbaik lahir dari kolaborasi yang solid dengan klien.') }}
                     </p>
                 </div>
             </div>
@@ -104,50 +102,38 @@
         <div class="row mb-5">
             <div class="col-12">
                 <h2 class="text-center mb-5">
-                    <span class="text-gradient">Layanan</span> Kami
+                    <span class="text-gradient">{{ \App\Models\WebsiteSetting::getValue('about_services_title', 'Layanan Kami') }}</span>
                 </h2>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h5 class="fw-bold mb-2">Web Development</h5>
+                    <h5 class="fw-bold mb-2">{{ \App\Models\WebsiteSetting::getValue('about_service1_title', 'Web Development') }}</h5>
                     <p class="text-muted small">
-                        Pengembangan website responsif dan modern dengan teknologi terkini.
+                        {{ \App\Models\WebsiteSetting::getValue('about_service1_content', 'Pengembangan website responsif dan modern dengan teknologi terkini.') }}
                     </p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h5 class="fw-bold mb-2">Mobile App</h5>
+                    <h5 class="fw-bold mb-2">{{ \App\Models\WebsiteSetting::getValue('about_service2_title', 'Mobile App') }}</h5>
                     <p class="text-muted small">
-                        Aplikasi mobile yang user-friendly untuk iOS dan Android.
+                        {{ \App\Models\WebsiteSetting::getValue('about_service2_content', 'Aplikasi mobile yang user-friendly untuk iOS dan Android.') }}
                     </p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h5 class="fw-bold mb-2">UI/UX Design</h5>
+                    <h5 class="fw-bold mb-2">{{ \App\Models\WebsiteSetting::getValue('about_service3_title', 'UI/UX Design') }}</h5>
                     <p class="text-muted small">
-                        Desain antarmuka yang menarik dan pengalaman pengguna yang optimal.
+                        {{ \App\Models\WebsiteSetting::getValue('about_service3_content', 'Desain antarmuka yang menarik dan pengalaman pengguna yang optimal.') }}
                     </p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h5 class="fw-bold mb-2">Digital Marketing</h5>
+                    <h5 class="fw-bold mb-2">{{ \App\Models\WebsiteSetting::getValue('about_service4_title', 'Digital Marketing') }}</h5>
                     <p class="text-muted small">
-                        Strategi pemasaran digital untuk meningkatkan visibilitas online.
+                        {{ \App\Models\WebsiteSetting::getValue('about_service4_content', 'Strategi pemasaran digital untuk meningkatkan visibilitas online.') }}
                     </p>
                 </div>
             </div>
@@ -157,13 +143,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="cta-section text-center">
-                    <h3 class="fw-bold mb-3">Siap Berkolaborasi dengan Kami?</h3>
+                    <h3 class="fw-bold mb-3">{{ \App\Models\WebsiteSetting::getValue('about_cta_title', 'Siap Berkolaborasi dengan Kami?') }}</h3>
                     <p class="text-muted mb-4">
-                        Mari wujudkan ide kreatif Anda bersama LittleStar Studio. 
-                        Hubungi kami untuk konsultasi gratis!
+                        {{ \App\Models\WebsiteSetting::getValue('about_cta_description', 'Mari wujudkan ide kreatif Anda bersama LittleStar Studio. Hubungi kami untuk konsultasi gratis!') }}
                     </p>
                     <a href="{{ route('contact') }}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-paper-plane me-2"></i>Mulai Proyek Anda
+                        <i class="fas fa-paper-plane me-2"></i>{{ \App\Models\WebsiteSetting::getValue('about_cta_button_text', 'Mulai Proyek Anda') }}
                     </a>
                 </div>
             </div>
@@ -265,20 +250,8 @@
     border-color: #1e3a8a;
 }
 
-.service-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.service-icon i {
-    font-size: 1.2rem;
-    color: white;
+.service-card h5 {
+    margin-top: 0;
 }
 
 .cta-section {

@@ -64,8 +64,8 @@
                                 </div>
                                 <div class="social-contact-content">
                                     <h5 class="fw-bold mb-2">Instagram</h5>
-                                    <p class="mb-2">Lihat portfolio & kirim DM</p>
-                                    <small class="text-muted">Portfolio terbaru • Behind the scenes</small>
+                                    <p class="mb-2">Lihat portofolio & kirim DM</p>
+                                    <small class="text-muted">Portofolio terbaru • Behind the scenes</small>
                                 </div>
                                 <div class="social-contact-arrow">
                                     <i class="fas fa-arrow-right"></i>
@@ -78,7 +78,7 @@
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle me-2"></i>
                             <strong>Tips:</strong> Untuk respon yang lebih cepat, gunakan WhatsApp. 
-                            Untuk melihat portfolio terbaru dan inspirasi, kunjungi Instagram kami.
+                            Untuk melihat portofolio terbaru dan inspirasi, kunjungi Instagram kami.
                         </div>
                     </div>
                 </div>

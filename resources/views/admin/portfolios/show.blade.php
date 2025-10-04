@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Detail Portfolio - Admin')
+@section('title', 'Detail Portofolio - Admin')
 @section('page-title', 'Dashboard Admin')
 
 @section('styles')
@@ -41,7 +41,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="fas fa-eye"></i> Detail Portfolio</span>
+                <span><i class="fas fa-eye"></i> Detail Portofolio</span>
                 <div>
                     <a href="{{ route('admin.portfolios.edit', $portfolio) }}" class="btn btn-sm btn-warning">
                         <i class="fas fa-edit"></i> Edit
@@ -120,7 +120,7 @@
                     </a>
                     <div>
                         <a href="{{ route('admin.portfolios.edit', $portfolio) }}" class="btn btn-warning">
-                            <i class="fas fa-edit"></i> Edit Portfolio
+                            <i class="fas fa-edit"></i> Edit Portofolio
                         </a>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus portfolio <strong>"{{ $portfolio->title }}"</strong>?</p>
+                <p>Apakah Anda yakin ingin menghapus portofolio <strong>"{{ $portfolio->title }}"</strong>?</p>
                 <p class="text-danger"><small><i class="fas fa-exclamation-triangle"></i> Aksi ini tidak dapat dibatalkan dan akan menghapus gambar dari server!</small></p>
             </div>
             <div class="modal-footer">
@@ -147,7 +147,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Ya, Hapus Portfolio
+                        <i class="fas fa-trash"></i> Ya, Hapus Portofolio
                     </button>
                 </form>
             </div>

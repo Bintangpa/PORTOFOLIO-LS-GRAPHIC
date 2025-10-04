@@ -1,0 +1,305 @@
+<?php $__env->startSection('title', \App\Models\WebsiteSetting::getValue('about_title', 'Tentang Kami') . ' - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio')); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    <span class="text-gradient"><?php echo e(\App\Models\WebsiteSetting::getValue('about_hero_title', 'Tentang LittleStar Studio')); ?></span>
+                </h1>
+                <p class="lead text-muted mb-4">
+                    <?php echo e(\App\Models\WebsiteSetting::getValue('about_hero_description', 'Kami adalah studio kreatif yang berdedikasi untuk menciptakan karya-karya digital yang menginspirasi dan memberikan dampak positif bagi klien dan masyarakat.')); ?>
+
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="<?php echo e(route('contact')); ?>" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                    </a>
+                    <a href="<?php echo e(route('home')); ?>" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-briefcase me-2"></i>Lihat Portofolio
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-image-wrapper">
+                    <img src="<?php echo e(asset('images/logo-ls-biru.png')); ?>" alt="LittleStar Studio" class="img-fluid about-logo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision & Mission -->
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="vision-card h-100">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_vision_title', 'Visi Kami')); ?></h3>
+                    <p class="text-muted">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_vision_content', 'Menjadi studio kreatif terdepan yang menghadirkan solusi digital inovatif dan berkualitas tinggi, serta memberikan pengalaman luar biasa bagi setiap klien yang bekerja sama dengan kami.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="mission-card h-100">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_mission_title', 'Misi Kami')); ?></h3>
+                    <p class="text-muted">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_mission_content', 'Menciptakan karya-karya digital yang tidak hanya indah secara visual, tetapi juga fungsional dan memberikan nilai tambah bagi bisnis klien melalui pendekatan yang kreatif dan profesional.')); ?>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Values -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center mb-5">
+                    <span class="text-gradient"><?php echo e(\App\Models\WebsiteSetting::getValue('about_values_title', 'Nilai-Nilai Kami')); ?></span>
+                </h2>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card text-center">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_value1_title', 'Kreativitas')); ?></h4>
+                    <p class="text-muted">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_value1_content', 'Kami selalu mencari solusi kreatif dan inovatif untuk setiap tantangan yang dihadapi.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card text-center">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_value2_title', 'Kualitas')); ?></h4>
+                    <p class="text-muted">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_value2_content', 'Setiap karya yang kami hasilkan selalu mengutamakan kualitas dan detail yang sempurna.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card text-center">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_value3_title', 'Kolaborasi')); ?></h4>
+                    <p class="text-muted">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_value3_content', 'Kami percaya bahwa hasil terbaik lahir dari kolaborasi yang solid dengan klien.')); ?>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Services -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center mb-5">
+                    <span class="text-gradient"><?php echo e(\App\Models\WebsiteSetting::getValue('about_services_title', 'Layanan Kami')); ?></span>
+                </h2>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <h5 class="fw-bold mb-2"><?php echo e(\App\Models\WebsiteSetting::getValue('about_service1_title', 'Web Development')); ?></h5>
+                    <p class="text-muted small">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_service1_content', 'Pengembangan website responsif dan modern dengan teknologi terkini.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <h5 class="fw-bold mb-2"><?php echo e(\App\Models\WebsiteSetting::getValue('about_service2_title', 'Mobile App')); ?></h5>
+                    <p class="text-muted small">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_service2_content', 'Aplikasi mobile yang user-friendly untuk iOS dan Android.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <h5 class="fw-bold mb-2"><?php echo e(\App\Models\WebsiteSetting::getValue('about_service3_title', 'UI/UX Design')); ?></h5>
+                    <p class="text-muted small">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_service3_content', 'Desain antarmuka yang menarik dan pengalaman pengguna yang optimal.')); ?>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <h5 class="fw-bold mb-2"><?php echo e(\App\Models\WebsiteSetting::getValue('about_service4_title', 'Digital Marketing')); ?></h5>
+                    <p class="text-muted small">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_service4_content', 'Strategi pemasaran digital untuk meningkatkan visibilitas online.')); ?>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="row">
+            <div class="col-12">
+                <div class="cta-section text-center">
+                    <h3 class="fw-bold mb-3"><?php echo e(\App\Models\WebsiteSetting::getValue('about_cta_title', 'Siap Berkolaborasi dengan Kami?')); ?></h3>
+                    <p class="text-muted mb-4">
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('about_cta_description', 'Mari wujudkan ide kreatif Anda bersama LittleStar Studio. Hubungi kami untuk konsultasi gratis!')); ?>
+
+                    </p>
+                    <a href="<?php echo e(route('contact')); ?>" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i><?php echo e(\App\Models\WebsiteSetting::getValue('about_cta_button_text', 'Mulai Proyek Anda')); ?>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-gradient {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-image-wrapper {
+    text-align: center;
+    padding: 2rem;
+}
+
+.about-logo {
+    max-width: 300px;
+    filter: drop-shadow(0 10px 30px rgba(30, 58, 138, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.vision-card, .mission-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.vision-card:hover, .mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.1);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.value-card {
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.value-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.1);
+    border-color: #1e3a8a;
+}
+
+.service-card h5 {
+    margin-top: 0;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid #1e3a8a;
+    color: #1e3a8a;
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #1e3a8a;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+}
+</style>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/about.blade.php ENDPATH**/ ?>

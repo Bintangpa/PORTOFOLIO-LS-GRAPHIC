@@ -64,13 +64,13 @@ php artisan key:generate
 
 ## 🎯 What This Repository Does
 
-LittleStar Studio is a Laravel-based portfolio management system that allows creative professionals to showcase their work through a public portfolio website with an admin panel for content management.
+LittleStar Studio is a Laravel-based portofolio management system that allows creative professionals to showcase their work through a public portofolio website with an admin panel for content management.
 
 **Key responsibilities:**
-- Display portfolio items in an attractive grid layout for public viewing
-- Provide detailed portfolio item pages with project information
-- Enable admin users to create, edit, and delete portfolio entries
-- Handle image uploads and storage for portfolio items
+- Display portofolio items in an attractive grid layout for public viewing
+- Provide detailed portofolio item pages with project information
+- Enable admin users to create, edit, and delete portofolio entries
+- Handle image uploads and storage for portofolio items
 
 ---
 
@@ -78,22 +78,22 @@ LittleStar Studio is a Laravel-based portfolio management system that allows cre
 
 ### System Context
 ```
-[Public Users] → [Portfolio Website] → [SQLite Database]
+[Public Users] → [Portofolio Website] → [SQLite Database]
                         ↓
 [Admin Users] → [Admin Panel] → [File Storage]
 ```
 
 ### Key Components
-- **HomeController** - Handles public portfolio display and detail views
-- **Admin/PortfolioController** - Manages CRUD operations for portfolio items
-- **Portfolio Model** - Represents portfolio items with image, metadata, and user relationships
+- **HomeController** - Handles public portofolio display and detail views
+- **Admin/PortfolioController** - Manages CRUD operations for portofolio items
+- **Portfolio Model** - Represents portofolio items with image, metadata, and user relationships
 - **User Model** - Handles authentication with role-based access (admin/public)
 - **AdminMiddleware** - Protects admin routes from unauthorized access
 
 ### Data Flow
-1. Public users browse portfolios via HomeController displaying paginated results
+1. Public users browse portofolios via HomeController displaying paginated results
 2. Admin users authenticate and access protected admin routes
-3. Portfolio CRUD operations store images in public storage and metadata in database
+3. Portofolio CRUD operations store images in public storage and metadata in database
 4. Role-based middleware ensures only admin users can modify content
 
 ---
@@ -111,7 +111,7 @@ littlestar-std/
 │   │   └── Middleware/
 │   │       └── AdminMiddleware.php
 │   └── Models/
-│       ├── Portfolio.php        # Portfolio item model
+│       ├── Portfolio.php        # Portofolio item model
 │       └── User.php            # User authentication model
 ├── database/
 │   ├── migrations/             # Database schema definitions
@@ -122,14 +122,14 @@ littlestar-std/
 │   │   ├── admin/             # Admin panel templates
 │   │   ├── auth/              # Authentication views
 │   │   ├── layouts/           # Shared layout templates
-│   │   ├── home.blade.php     # Public portfolio grid
+│   │   ├── home.blade.php     # Public portofolio grid
 │   │   └── portfolio-detail.blade.php
 │   ├── js/                    # JavaScript assets
 │   └── sass/                  # SCSS stylesheets
 ├── routes/
 │   └── web.php                # Application routes
 ├── storage/
-│   └── app/public/            # Uploaded portfolio images
+│   └── app/public/            # Uploaded portofolio images
 ├── tests/
 │   ├── Feature/               # Integration tests
 │   └── Unit/                  # Unit tests
@@ -143,10 +143,10 @@ littlestar-std/
 | File | Purpose | When You'd Touch It |
 |------|---------|---------------------|
 | `routes/web.php` | Application routing | Adding new pages/endpoints |
-| `app/Http/Controllers/HomeController.php` | Public portfolio display | Modifying public views |
-| `app/Http/Controllers/Admin/PortfolioController.php` | Admin portfolio management | Changing admin functionality |
-| `app/Models/Portfolio.php` | Portfolio data model | Modifying portfolio structure |
-| `resources/views/home.blade.php` | Main portfolio page | Updating public design |
+| `app/Http/Controllers/HomeController.php` | Public portofolio display | Modifying public views |
+| `app/Http/Controllers/Admin/PortfolioController.php` | Admin portofolio management | Changing admin functionality |
+| `app/Models/Portfolio.php` | Portofolio data model | Modifying portofolio structure |
+| `resources/views/home.blade.php` | Main portofolio page | Updating public design |
 | `database/migrations/` | Database schema | Adding/modifying database fields |
 | `vite.config.js` | Frontend build setup | Changing asset compilation |
 | `composer.json` | PHP dependencies | Adding Laravel packages |
@@ -178,8 +178,8 @@ littlestar-std/
 ## 🌐 External Dependencies
 
 ### Required Services
-- **File Storage** - Local storage for portfolio images in `storage/app/public`
-- **SQLite Database** - Stores user accounts, portfolio metadata, and application data
+- **File Storage** - Local storage for portofolio images in `storage/app/public`
+- **SQLite Database** - Stores user accounts, portofolio metadata, and application data
 
 ### Optional Integrations
 - **Mail Service** - Configured for password reset functionality (currently set to log driver)
@@ -203,20 +203,20 @@ CACHE_STORE=database       # Cache storage driver
 
 ## 🔄 Common Workflows
 
-### Portfolio Management Workflow
+### Portofolio Management Workflow
 1. Admin logs in via `/login` with admin credentials
-2. Admin accesses portfolio management at `/admin/portfolios`
-3. Admin creates new portfolio with image upload and metadata
+2. Admin accesses portofolio management at `/admin/portfolios`
+3. Admin creates new portofolio with image upload and metadata
 4. System stores image in `storage/app/public/portfolios/`
-5. Portfolio appears on public homepage immediately
+5. Portofolio appears on public homepage immediately
 
 **Code path:** `AdminMiddleware` → `PortfolioController@store` → `Portfolio Model` → `Storage`
 
-### Public Portfolio Viewing
+### Public Portofolio Viewing
 1. User visits homepage at `/`
-2. HomeController fetches paginated portfolios from database
-3. Portfolio grid displays with image thumbnails and basic info
-4. User clicks portfolio for detailed view at `/portfolio/{id}`
+2. HomeController fetches paginated portofolios from database
+3. Portofolio grid displays with image thumbnails and basic info
+4. User clicks portofolio for detailed view at `/portfolio/{id}`
 
 **Code path:** `HomeController@index` → `Portfolio Model` → `home.blade.php`
 
@@ -225,9 +225,9 @@ CACHE_STORE=database       # Cache storage driver
 ## 📈 Performance & Scale
 
 ### Performance Considerations
-- **Image Storage:** Portfolio images stored locally in `storage/app/public`
-- **Database:** SQLite suitable for small to medium portfolio collections
-- **Pagination:** Portfolio listings paginated (12 items per page)
+- **Image Storage:** Portofolio images stored locally in `storage/app/public`
+- **Database:** SQLite suitable for small to medium portofolio collections
+- **Pagination:** Portofolio listings paginated (12 items per page)
 
 ### Monitoring
 - **Logs:** Laravel logs stored in `storage/logs/`

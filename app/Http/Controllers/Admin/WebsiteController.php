@@ -22,13 +22,13 @@ class WebsiteController extends Controller
             
             // Page Titles
             'home_title' => $this->getSetting('home_title', 'Beranda'),
-            'portfolio_title' => $this->getSetting('portfolio_title', 'Portfolio'),
+            'portfolio_title' => $this->getSetting('portfolio_title', 'Portofolio'),
             'about_title' => $this->getSetting('about_title', 'Tentang Kami'),
             'contact_title' => $this->getSetting('contact_title', 'Kontak Kami'),
             
             // Page Headers
             'home_header' => $this->getSetting('home_header', 'LittleStar Studio'),
-            'portfolio_header' => $this->getSetting('portfolio_header', 'Portfolio Kami'),
+            'portfolio_header' => $this->getSetting('portfolio_header', 'Portofolio Kami'),
             'portfolio_subtitle' => $this->getSetting('portfolio_subtitle', 'Jelajahi koleksi lengkap karya-karya terbaik LittleStar Studio'),
             'about_header' => $this->getSetting('about_header', 'Tentang LittleStar Studio'),
             'contact_header' => $this->getSetting('contact_header', 'Hubungi Kami'),
@@ -139,12 +139,12 @@ class WebsiteController extends Controller
             'site_tagline' => 'Tagline Website',
             'site_description' => 'Deskripsi Website',
             'home_title' => 'Judul Halaman Beranda',
-            'portfolio_title' => 'Judul Halaman Portfolio',
+            'portfolio_title' => 'Judul Halaman Portofolio',
             'about_title' => 'Judul Halaman About',
             'contact_title' => 'Judul Halaman Kontak',
             'home_header' => 'Header Halaman Beranda',
-            'portfolio_header' => 'Header Halaman Portfolio',
-            'portfolio_subtitle' => 'Subtitle Portfolio',
+            'portfolio_header' => 'Header Halaman Portofolio',
+            'portfolio_subtitle' => 'Subtitle Portofolio',
             'about_header' => 'Header Halaman About',
             'contact_header' => 'Header Halaman Kontak',
             'contact_subtitle' => 'Subtitle Kontak',

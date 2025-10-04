@@ -46,10 +46,10 @@ class WebsiteSettingsSeeder extends Seeder
             ],
             [
                 'key' => 'portfolio_title',
-                'value' => 'Portfolio',
+                'value' => 'Portofolio',
                 'type' => 'text',
-                'label' => 'Judul Halaman Portfolio',
-                'description' => 'Title yang muncul di tab browser untuk halaman portfolio'
+                'label' => 'Judul Halaman Portofolio',
+                'description' => 'Title yang muncul di tab browser untuk halaman portofolio'
             ],
             [
                 'key' => 'about_title',
@@ -76,17 +76,17 @@ class WebsiteSettingsSeeder extends Seeder
             ],
             [
                 'key' => 'portfolio_header',
-                'value' => 'Portfolio Kami',
+                'value' => 'Portofolio Kami',
                 'type' => 'text',
-                'label' => 'Header Halaman Portfolio',
-                'description' => 'Judul besar yang muncul di halaman portfolio'
+                'label' => 'Header Halaman Portofolio',
+                'description' => 'Judul besar yang muncul di halaman portofolio'
             ],
             [
                 'key' => 'portfolio_subtitle',
                 'value' => 'Jelajahi koleksi lengkap karya-karya terbaik LittleStar Studio',
                 'type' => 'text',
-                'label' => 'Subtitle Portfolio',
-                'description' => 'Subtitle yang muncul di bawah header portfolio'
+                'label' => 'Subtitle Portofolio',
+                'description' => 'Subtitle yang muncul di bawah header portofolio'
             ],
             [
                 'key' => 'about_header',

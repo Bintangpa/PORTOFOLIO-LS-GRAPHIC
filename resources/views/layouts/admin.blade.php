@@ -65,12 +65,13 @@
         }
         
         .sidebar-header {
-            padding: 30px 25px;
+            padding: 25px 20px;
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
             text-align: center;
             border-bottom: 3px solid rgba(255, 255, 255, 0.2);
             flex-shrink: 0;
+            margin: 0;
         }
         
         .sidebar-header h3 {
@@ -89,15 +90,35 @@
         }
         
         .sidebar-menu {
-            padding: 20px 0;
+            padding: 15px 0;
+            margin: 0 10px;
             flex: 1;
             overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(30, 58, 138, 0.3) transparent;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: rgba(30, 58, 138, 0.3);
+            border-radius: 3px;
+        }
+        
+        .sidebar-menu::-webkit-scrollbar-thumb:hover {
+            background: rgba(30, 58, 138, 0.5);
         }
         
         .sidebar-menu .nav-link {
             color: #333;
-            padding: 12px 20px;
-            margin: 3px 15px;
+            padding: 12px 15px;
+            margin: 3px 5px;
             border-radius: 12px;
             transition: all 0.3s ease;
             font-weight: 500;
@@ -140,9 +161,11 @@
         }
         
         .sidebar-footer {
-            padding: 20px 25px;
+            padding: 15px 20px;
+            margin: 0 10px 10px 10px;
             border-top: 2px solid #f0f0f0;
             background: rgba(248, 249, 250, 0.8);
+            border-radius: 15px;
             margin-top: auto;
             flex-shrink: 0;
         }
@@ -458,8 +481,9 @@
                 top: 0;
                 left: 0;
                 height: 100vh;
-                border-radius: 0;
                 transform: translateX(-100%);
+                border-radius: 0;
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
             }
             
             .sidebar.active {
@@ -468,7 +492,37 @@
             
             .main-content {
                 margin-left: 0;
-                padding: 20px;
+                padding: 80px 20px 20px 20px;
+            }
+            
+            .mobile-menu-toggle {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+                color: white;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-menu-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 25px rgba(30, 58, 138, 0.6);
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
             }
         }
         
@@ -635,8 +689,13 @@
     
     <!-- Admin Content -->
     <div class="admin-content" id="adminContent">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-star"></i> {{ \App\Models\WebsiteSetting::getValue('admin_brand', 'LITTLESTAR') }}</h3>
             <small>Admin Dashboard</small>
@@ -645,16 +704,19 @@
         <div class="sidebar-menu">
             <nav class="nav flex-column">
                 <a class="nav-link {{ request()->routeIs('admin.portfolios.index') ? 'active' : '' }}" href="{{ route('admin.portfolios.index') }}">
-                    <i class="fas fa-list"></i> Kelola Portfolio
+                    <i class="fas fa-list"></i> Kelola Portofolio
                 </a>
                 <a class="nav-link {{ request()->routeIs('admin.portfolios.create') ? 'active' : '' }}" href="{{ route('admin.portfolios.create') }}">
-                    <i class="fas fa-plus-circle"></i> Tambah Portfolio
+                    <i class="fas fa-plus-circle"></i> Tambah Portofolio
                 </a>
                 <a class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}" href="{{ route('admin.contact.index') }}">
                     <i class="fas fa-address-book"></i> Kontak Control
                 </a>
                 <a class="nav-link {{ request()->routeIs('admin.website.*') ? 'active' : '' }}" href="{{ route('admin.website.index') }}">
                     <i class="fas fa-cogs"></i> Website Settings
+                </a>
+                <a class="nav-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}" href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-info-circle"></i> Kelola Halaman Tentang
                 </a>
                 <a class="nav-link" href="{{ route('home') }}" target="_blank">
                     <i class="fas fa-globe"></i> Preview Website
@@ -790,6 +852,42 @@
             window.addEventListener('beforeunload', function() {
                 showLoading();
             });
+            
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (mobileMenuToggle && sidebar) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    
+                    // Change icon
+                    const icon = mobileMenuToggle.querySelector('i');
+                    if (sidebar.classList.contains('active')) {
+                        icon.className = 'fas fa-times';
+                    } else {
+                        icon.className = 'fas fa-bars';
+                    }
+                });
+                
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                            sidebar.classList.remove('active');
+                            mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+                        }
+                    }
+                });
+                
+                // Close sidebar on window resize to desktop
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('active');
+                        mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+                    }
+                });
+            }
         });
     </script>
     

@@ -11,7 +11,7 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $portfolios = Portfolio::latest()->paginate(12);
+        $portfolios = Portfolio::latest()->paginate(10);
         return view('admin.portfolios.index', compact('portfolios'));
     }
 
@@ -44,7 +44,7 @@ class PortfolioController extends Controller
         ]);
 
         return redirect()->route('admin.portfolios.index')
-            ->with('success', 'Portfolio berhasil ditambahkan!');
+            ->with('success', 'Portofolio berhasil ditambahkan!');
     }
 
     public function show(Portfolio $portfolio)
@@ -80,7 +80,7 @@ class PortfolioController extends Controller
         $portfolio->update($data);
 
         return redirect()->route('admin.portfolios.index')
-            ->with('success', 'Portfolio berhasil diupdate!');
+            ->with('success', 'Portofolio berhasil diupdate!');
     }
 
     public function destroy(Portfolio $portfolio)
@@ -89,6 +89,6 @@ class PortfolioController extends Controller
         $portfolio->delete();
 
         return redirect()->route('admin.portfolios.index')
-            ->with('success', 'Portfolio berhasil dihapus!');
+            ->with('success', 'Portofolio berhasil dihapus!');
     }
 }

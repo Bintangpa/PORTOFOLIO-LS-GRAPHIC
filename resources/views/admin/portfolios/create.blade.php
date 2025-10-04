@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Portfolio - Admin')
+@section('title', 'Tambah Portofolio - Admin')
 @section('page-title', 'Dashboard Admin')
 
 @section('styles')
@@ -418,11 +418,11 @@
                         <div class="mb-compact">
                             <label for="title" class="form-label">
                                 <i class="fas fa-heading me-1"></i>
-                                Judul Portfolio <span class="required-asterisk">*</span>
+                                Judul Portofolio <span class="required-asterisk">*</span>
                             </label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror" 
                                    id="title" name="title" value="{{ old('title') }}" 
-                                   placeholder="Masukkan judul portfolio..." required>
+                                   placeholder="Masukkan judul portofolio..." required>
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -511,7 +511,7 @@
                         <div class="mb-compact">
                             <label class="form-label">
                                 <i class="fas fa-image me-1"></i>
-                                Gambar Portfolio <span class="required-asterisk">*</span>
+                                Gambar Portofolio <span class="required-asterisk">*</span>
                             </label>
                             
                             <div class="upload-area" onclick="document.getElementById('image').click()">
@@ -557,7 +557,7 @@
                 </div>
                 <div class="position-absolute end-0">
                     <button type="submit" form="portfolioForm" class="btn btn-primary btn-action">
-                        <i class="fas fa-plus-circle me-2"></i>Tambah Portfolio
+                        <i class="fas fa-plus-circle me-2"></i>Tambah Portofolio
                     </button>
                 </div>
             </div>
