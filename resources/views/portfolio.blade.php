@@ -508,7 +508,7 @@
         <form action="{{ route('portfolio') }}" method="GET" class="search-form">
             <div class="search-input">
                 <input type="text" name="search" class="form-control" 
-                       placeholder="Cari portofolio berdasarkan judul, deskripsi, kategori..." 
+                       placeholder="Cari portofolio berdasarkan judul, deskripsi, kategori, atau klien..." 
                        value="{{ request('search') }}">
             </div>
             <button type="submit" class="btn search-btn">

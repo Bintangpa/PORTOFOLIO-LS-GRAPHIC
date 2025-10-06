@@ -171,11 +171,11 @@
                                             <p class="portfolio-description">
                                                 {{ Str::limit($portfolio->description, 80) }}
                                             </p>
-                                            @if($portfolio->technologies)
-                                                <div class="portfolio-tech">
+                                            @if($portfolio->client)
+                                                <div class="portfolio-client">
                                                     <small class="text-muted">
-                                                        <i class="fas fa-code me-1"></i>
-                                                        {{ Str::limit($portfolio->technologies, 50) }}
+                                                        <i class="fas fa-user me-1"></i>
+                                                        {{ $portfolio->client }}
                                                     </small>
                                                 </div>
                                             @endif
@@ -187,9 +187,16 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="d-flex justify-content-center mt-4">
-                        {{ $portfolios->links() }}
-                    </div>
+                    @if($portfolios->hasPages())
+                        <div class="pagination-container">
+                            <div class="pagination-wrapper">
+                                {{ $portfolios->withQueryString()->links('custom.pagination') }}
+                            </div>
+                            <div class="pagination-info">
+                                Menampilkan {{ $portfolios->firstItem() }} - {{ $portfolios->lastItem() }} dari {{ $portfolios->total() }} portofolio
+                            </div>
+                        </div>
+                    @endif
                 @else
                     <div class="no-results">
                         <div class="text-center py-5">
@@ -415,6 +422,159 @@
     color: white;
 }
 
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Custom Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination .page-item {
+    margin: 0;
+}
+
+.pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #1e3a8a;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+.pagination .page-link:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    border-color: #1e40af;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    border: 3px solid #ff6b35;
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6), 0 0 0 3px rgba(255, 107, 53, 0.2);
+    transform: scale(1.15);
+    font-weight: 800;
+    position: relative;
+    z-index: 10;
+}
+
+.pagination .page-item.active .page-link::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b35, #f7931e, #ff6b35);
+    border-radius: 50%;
+    z-index: -1;
+    animation: activePagePulse 2s ease-in-out infinite;
+}
+
+@keyframes activePagePulse {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Prevent hover effects on active page */
+.pagination .page-item.active .page-link:hover {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    border: 3px solid #ff6b35;
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6), 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.pagination .page-item.disabled .page-link {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    border-color: #6c757d;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination .page-item.disabled .page-link:hover {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    border-color: #6c757d;
+    color: rgba(255, 255, 255, 0.6);
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+/* Previous/Next buttons */
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    width: auto;
+    min-width: 120px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: auto;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #1e3a8a;
+    color: white;
+}
+
+.pagination .page-item:first-child .page-link:hover,
+.pagination .page-item:last-child .page-link:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    border-color: #1e40af;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.4);
+}
+
+/* Pagination container */
+.pagination-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Pagination info */
+.pagination-info {
+    text-align: center;
+    margin-top: 1rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 991.98px) {
     .filter-sidebar {
         position: static;
@@ -428,6 +588,30 @@
     
     .search-title {
         font-size: 2rem;
+    }
+    
+    /* Mobile pagination adjustments */
+    .pagination .page-item:first-child .page-link,
+    .pagination .page-item:last-child .page-link {
+        min-width: 80px;
+        padding: 0 15px;
+        font-size: 0.8rem;
+    }
+    
+    .pagination .page-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+    
+    .pagination-container {
+        padding: 15px;
+        margin-top: 1.5rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.8rem;
+        margin-top: 0.8rem;
     }
 }
 </style>

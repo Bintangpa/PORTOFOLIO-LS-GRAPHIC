@@ -26,7 +26,7 @@ class HomeController extends Controller
                 $q->where('title', 'LIKE', "%{$searchTerm}%")
                   ->orWhere('description', 'LIKE', "%{$searchTerm}%")
                   ->orWhere('category', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('technologies', 'LIKE', "%{$searchTerm}%");
+                  ->orWhere('client', 'LIKE', "%{$searchTerm}%");
             });
         }
         
@@ -63,7 +63,8 @@ class HomeController extends Controller
             $query->where(function($q) use ($searchTerm) {
                 $q->where('title', 'LIKE', "%{$searchTerm}%")
                   ->orWhere('description', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('technologies', 'LIKE', "%{$searchTerm}%");
+                  ->orWhere('category', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('client', 'LIKE', "%{$searchTerm}%");
             });
         }
         
