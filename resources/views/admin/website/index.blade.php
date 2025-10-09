@@ -116,6 +116,20 @@
         border-left: 4px solid #dc2626;
     }
 
+    .alert-warning {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        color: #92400e;
+        border-left: 4px solid #f59e0b;
+        font-weight: 500;
+    }
+
+    .alert-info {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #1e40af;
+        border-left: 4px solid #3b82f6;
+        font-weight: 500;
+    }
+
     .row {
         margin-left: -10px;
         margin-right: -10px;
@@ -182,6 +196,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
+
+    <!-- Security Notice -->
+    <div class="alert alert-warning">
+        <i class="fas fa-shield-alt me-2"></i>
+        <strong>Akses Admin:</strong> Halaman ini hanya dapat diakses oleh administrator. 
+        Semua perubahan pengaturan website memerlukan hak akses admin.
+    </div>
 
     <!-- Preview Note -->
     <div class="preview-note">
@@ -335,6 +356,52 @@
                     <label class="form-label">Subtitle Kontak</label>
                     <textarea name="settings[contact_subtitle]" class="form-control" rows="2">{{ $settings['contact_subtitle'] }}</textarea>
                     <div class="form-text">Subtitle yang muncul di bawah header kontak</div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-address-book"></i>
+                    </div>
+                    <h3 class="section-title">Informasi Kontak</h3>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Nomor WhatsApp</label>
+                            <input type="text" name="settings[contact_whatsapp]" class="form-control" 
+                                   value="{{ $settings['contact_whatsapp'] }}" required 
+                                   placeholder="62123456789">
+                            <div class="form-text">Nomor WhatsApp tanpa tanda + (contoh: 62123456789)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Username Instagram</label>
+                            <input type="text" name="settings[contact_instagram]" class="form-control" 
+                                   value="{{ $settings['contact_instagram'] }}" required 
+                                   placeholder="littlestarstudio">
+                            <div class="form-text">Username Instagram tanpa @ (contoh: littlestarstudio)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Email Kontak</label>
+                            <input type="email" name="settings[contact_email]" class="form-control" 
+                                   value="{{ $settings['contact_email'] }}" required 
+                                   placeholder="info@littlestarstudio.com">
+                            <div class="form-text">Email utama untuk kontak</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-user-shield me-2"></i>
+                    <strong>Khusus Admin:</strong> Informasi kontak ini akan muncul di tombol kontak pada halaman pencarian portofolio. 
+                    Hanya administrator yang dapat mengubah pengaturan ini.
                 </div>
             </div>
 

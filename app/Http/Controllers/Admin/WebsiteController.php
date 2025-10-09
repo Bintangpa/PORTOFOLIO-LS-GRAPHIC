@@ -13,6 +13,10 @@ class WebsiteController extends Controller
      */
     public function index()
     {
+        // Additional security check
+        if (!auth()->user()->isAdmin()) {
+            abort(403, 'Akses ditolak. Hanya administrator yang dapat mengakses pengaturan website.');
+        }
         // Get current website settings with default values
         $settings = [
             // Brand Identity
@@ -34,6 +38,11 @@ class WebsiteController extends Controller
             'contact_header' => $this->getSetting('contact_header', 'Hubungi Kami'),
             'contact_subtitle' => $this->getSetting('contact_subtitle', 'Siap membantu mewujudkan ide kreatif Anda. Mari berkolaborasi!'),
             
+            // Contact Information
+            'contact_whatsapp' => $this->getSetting('contact_whatsapp', '62123456789'),
+            'contact_instagram' => $this->getSetting('contact_instagram', 'littlestarstudio'),
+            'contact_email' => $this->getSetting('contact_email', 'info@littlestarstudio.com'),
+            
             // Footer & Others
             'footer_copyright' => $this->getSetting('footer_copyright', 'LittleStar Studio. All rights reserved.'),
             'loading_text' => $this->getSetting('loading_text', 'LITTLESTAR STUDIO'),
@@ -49,6 +58,17 @@ class WebsiteController extends Controller
      */
     public function update(Request $request)
     {
+        // Additional security check
+        if (!auth()->user()->isAdmin()) {
+            abort(403, 'Akses ditolak. Hanya administrator yang dapat mengubah pengaturan website.');
+        }
+        
+        // Log admin activity
+        \Log::info('Admin mengubah pengaturan website', [
+            'admin_id' => auth()->id(),
+            'admin_name' => auth()->user()->name,
+            'timestamp' => now()
+        ]);
         $request->validate([
             'settings' => 'required|array',
             'settings.site_name' => 'required|string|max:255',
@@ -64,6 +84,9 @@ class WebsiteController extends Controller
             'settings.loading_text' => 'required|string|max:255',
             'settings.admin_title' => 'required|string|max:255',
             'settings.admin_brand' => 'required|string|max:255',
+            'settings.contact_whatsapp' => 'required|string|max:20',
+            'settings.contact_instagram' => 'required|string|max:100',
+            'settings.contact_email' => 'required|email|max:255',
             'settings.site_tagline' => 'nullable|string|max:255',
             'settings.site_description' => 'nullable|string|max:1000',
             'settings.portfolio_subtitle' => 'nullable|string|max:500',
@@ -82,6 +105,10 @@ class WebsiteController extends Controller
             'settings.loading_text.required' => 'Teks loading screen wajib diisi',
             'settings.admin_title.required' => 'Judul admin dashboard wajib diisi',
             'settings.admin_brand.required' => 'Brand admin sidebar wajib diisi',
+            'settings.contact_whatsapp.required' => 'Nomor WhatsApp wajib diisi',
+            'settings.contact_instagram.required' => 'Username Instagram wajib diisi',
+            'settings.contact_email.required' => 'Email kontak wajib diisi',
+            'settings.contact_email.email' => 'Format email tidak valid',
         ]);
 
         try {
@@ -152,6 +179,9 @@ class WebsiteController extends Controller
             'loading_text' => 'Teks Loading Screen',
             'admin_title' => 'Judul Admin Dashboard',
             'admin_brand' => 'Brand Admin Sidebar',
+            'contact_whatsapp' => 'Nomor WhatsApp',
+            'contact_instagram' => 'Username Instagram',
+            'contact_email' => 'Email Kontak',
         ];
 
         return $labels[$key] ?? ucfirst(str_replace('_', ' ', $key));

@@ -1,7 +1,7 @@
 <?php $__env->startSection('title', 'Pencarian Portofolio - ' . \App\Models\WebsiteSetting::getValue('site_name', 'LittleStar Studio')); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div class="container-fluid px-4">
     <div class="search-header">
         <div class="row align-items-center mb-4">
             <div class="col-lg-6">
@@ -29,17 +29,18 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="search-layout">
         <!-- Filter Sidebar -->
-        <div class="col-lg-3 mb-4">
+        <div class="filter-sidebar-container">
             <div class="filter-sidebar">
                 <div class="filter-header">
                     <h5 class="fw-bold mb-3">
                         <i class="fas fa-filter me-2"></i>Filter Pencarian
                     </h5>
                 </div>
-
-                <form method="GET" action="<?php echo e(route('search')); ?>" id="filterForm">
+                
+                <div class="filter-content">
+                    <form method="GET" action="<?php echo e(route('search')); ?>" id="filterForm">
                     <!-- Search Input -->
                     <div class="filter-section">
                         <label class="filter-label">Kata Kunci</label>
@@ -96,26 +97,26 @@
                             </a>
                         </div>
                     <?php endif; ?>
-                </form>
+                    </form>
 
-                <!-- Quick Filters -->
-                <div class="quick-filters mt-4">
-                    <h6 class="fw-semibold mb-3">Filter Cepat</h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        <?php $__currentLoopData = $categories->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <a href="<?php echo e(route('search')); ?>?category=<?php echo e($category); ?>" 
-                               class="badge bg-light text-dark text-decoration-none quick-filter-badge">
-                                <?php echo e(ucfirst($category)); ?>
-
-                            </a>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <!-- Contact Buttons -->
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/<?php echo e(\App\Models\WebsiteSetting::getValue('contact_whatsapp', '62123456789')); ?>" target="_blank" class="btn btn-success w-100 mb-2">
+                            <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                        </a>
+                        <a href="https://instagram.com/<?php echo e(\App\Models\WebsiteSetting::getValue('contact_instagram', 'littlestarstudio')); ?>" target="_blank" class="btn btn-instagram w-100 mb-2">
+                            <i class="fab fa-instagram me-2"></i>Instagram
+                        </a>
+                        <a href="mailto:<?php echo e(\App\Models\WebsiteSetting::getValue('contact_email', 'info@littlestarstudio.com')); ?>" class="btn btn-email w-100">
+                            <i class="fas fa-envelope me-2"></i>Email
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Results Area -->
-        <div class="col-lg-9">
+        <div class="results-area">
             <!-- Active Filters -->
             <?php if(request()->hasAny(['search', 'category', 'sort'])): ?>
                 <div class="active-filters mb-4">
@@ -152,39 +153,41 @@
                 </div>
             <?php endif; ?>
 
-            <!-- Results Grid -->
+            <!-- Results List -->
             <div class="results-container">
                 <?php if($portfolios->count() > 0): ?>
-                    <div class="row">
+                    <div class="portfolio-list">
                         <?php $__currentLoopData = $portfolios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $portfolio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <a href="<?php echo e(route('portfolio.show', $portfolio)); ?>" class="text-decoration-none">
-                                    <div class="portfolio-card">
+                            <div class="portfolio-list-item" data-portfolio-id="<?php echo e($portfolio->id); ?>">
+                                <div class="portfolio-thumbnail">
+                                    <img src="<?php echo e(asset('storage/' . $portfolio->image_path)); ?>" 
+                                         alt="<?php echo e($portfolio->title); ?>" class="img-fluid">
+                                </div>
+                                <div class="portfolio-info">
+                                    <div class="portfolio-header">
+                                        <h6 class="portfolio-title mb-1"><?php echo e($portfolio->title); ?></h6>
                                         <?php if($portfolio->category): ?>
-                                            <span class="badge-category"><?php echo e($portfolio->category); ?></span>
+                                            <span class="badge badge-category-small"><?php echo e($portfolio->category); ?></span>
                                         <?php endif; ?>
-                                        <div class="portfolio-image">
-                                            <img src="<?php echo e(asset('storage/' . $portfolio->image_path)); ?>" 
-                                                 alt="<?php echo e($portfolio->title); ?>" class="img-fluid">
-                                        </div>
-                                        <div class="portfolio-card-body">
-                                            <h5 class="portfolio-title"><?php echo e($portfolio->title); ?></h5>
-                                            <p class="portfolio-description">
-                                                <?php echo e(Str::limit($portfolio->description, 80)); ?>
-
-                                            </p>
-                                            <?php if($portfolio->client): ?>
-                                                <div class="portfolio-client">
-                                                    <small class="text-muted">
-                                                        <i class="fas fa-user me-1"></i>
-                                                        <?php echo e($portfolio->client); ?>
-
-                                                    </small>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
                                     </div>
-                                </a>
+                                    <p class="portfolio-description mb-1">
+                                        <?php echo e(Str::limit($portfolio->description, 100)); ?>
+
+                                    </p>
+                                    <?php if($portfolio->client): ?>
+                                        <small class="text-muted">
+                                            <i class="fas fa-user me-1"></i>
+                                            <?php echo e($portfolio->client); ?>
+
+                                        </small>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="<?php echo e(route('portfolio.show', $portfolio)); ?>" 
+                                       class="btn btn-sm btn-primary">
+                                        <i class="fas fa-external-link-alt me-1"></i>Lihat
+                                    </a>
+                                </div>
                             </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
@@ -216,11 +219,22 @@
                     </div>
                 <?php endif; ?>
             </div>
+
+
         </div>
     </div>
 </div>
 
 <style>
+:root {
+    --navbar-height: 80px;
+}
+
+/* Ensure navbar stays above sticky filter */
+.navbar.sticky-top {
+    z-index: 1030 !important;
+}
+
 .text-gradient {
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     -webkit-background-clip: text;
@@ -245,20 +259,62 @@
     text-align: right;
 }
 
+.search-layout {
+    position: relative;
+    display: flex;
+    min-height: calc(100vh - 200px);
+    gap: 30px;
+}
+
+.filter-sidebar-container {
+    position: sticky;
+    top: calc(var(--navbar-height, 80px) + 20px);
+    width: 320px;
+    height: fit-content;
+    flex-shrink: 0;
+    align-self: flex-start;
+    z-index: 1000;
+}
+
 .filter-sidebar {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    border: 1px solid #e2e8f0;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    height: auto;
+}
+
+
+
+/* Removed scrollbar styles as scrolling is no longer needed */
+
+.results-area {
+    flex: 1;
     background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
+    border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     border: 1px solid #e2e8f0;
-    position: sticky;
-    top: 100px;
+    padding: 2rem;
+    position: relative;
+    min-height: calc(100vh - 200px);
 }
 
 .filter-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+    margin-bottom: 0;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+}
+
+.filter-content {
+    padding: 1.5rem;
+    padding-top: 0;
 }
 
 .filter-section {
@@ -284,18 +340,7 @@
     box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.25);
 }
 
-.quick-filter-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-}
 
-.quick-filter-badge:hover {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%) !important;
-    color: white !important;
-    transform: translateY(-2px);
-}
 
 .active-filters {
     background: #f8fafc;
@@ -304,76 +349,196 @@
     border: 1px solid #e2e8f0;
 }
 
-.portfolio-card {
+/* Contact Buttons */
+.contact-buttons {
+    margin-top: 1.5rem;
+}
+
+.contact-buttons .btn {
+    border: none;
+    border-radius: 15px;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.contact-buttons .btn:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* WhatsApp Button */
+.contact-buttons .btn-success {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.contact-buttons .btn-success:hover {
+    background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* Instagram Button */
+.contact-buttons .btn-instagram {
+    background: linear-gradient(135deg, #e4405f 0%, #833ab4 50%, #fccc63 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(228, 64, 95, 0.3);
+}
+
+.contact-buttons .btn-instagram:hover {
+    background: linear-gradient(135deg, #833ab4 0%, #e4405f 50%, #fccc63 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(228, 64, 95, 0.4);
+}
+
+/* Email Button */
+.contact-buttons .btn-email {
+    background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.contact-buttons .btn-email:hover {
+    background: linear-gradient(135deg, #34a853 0%, #4285f4 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+/* Portfolio List Styles */
+.portfolio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.portfolio-list-item {
     background: white;
     border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     border: 1px solid #e2e8f0;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.portfolio-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+.portfolio-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-color: #1e3a8a;
 }
 
-.portfolio-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4/3;
+.portfolio-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
 }
 
-.portfolio-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.portfolio-thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.portfolio-card:hover .portfolio-image img {
+.portfolio-list-item:hover .portfolio-thumbnail img {
     transform: scale(1.1);
 }
 
-.badge-category {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    z-index: 2;
+.portfolio-info {
+    flex: 1;
+    min-width: 0;
 }
 
-.portfolio-card-body {
-    padding: 1.5rem;
+.portfolio-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .portfolio-title {
     font-weight: 600;
     color: #1f2937;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.badge-category-small {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.7rem;
 }
 
 .portfolio-description {
     color: #6b7280;
     font-size: 0.9rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin: 0;
 }
 
-.portfolio-tech {
-    border-top: 1px solid #e2e8f0;
-    padding-top: 0.75rem;
+.portfolio-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.portfolio-actions .btn {
+    min-width: 80px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .portfolio-list-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .portfolio-thumbnail {
+        width: 100px;
+        height: 100px;
+        align-self: center;
+    }
+    
+    .portfolio-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .portfolio-actions {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .portfolio-actions .btn {
+        min-width: 100px;
+    }
+    
+    .modal-body .row {
+        flex-direction: column-reverse;
+    }
+    
+    .modal-body .col-md-4 {
+        margin-bottom: 1rem;
+    }
 }
 
 .no-results {
@@ -580,9 +745,63 @@
 }
 
 @media (max-width: 991.98px) {
+    .search-layout {
+        flex-direction: column;
+        gap: 20px;
+        min-height: auto;
+    }
+    
+    .filter-sidebar-container {
+        position: fixed;
+        top: var(--navbar-height, 80px);
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+        padding: 0 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
     .filter-sidebar {
-        position: static;
-        margin-bottom: 2rem;
+        border-radius: 0;
+        border: none;
+        height: auto;
+        background: transparent;
+        box-shadow: none;
+        padding: 1rem 0;
+    }
+    
+    .filter-header {
+        padding: 1rem 0 0.5rem 0;
+        border-radius: 0;
+        background: transparent;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .filter-content {
+        padding: 1rem 0;
+    }
+    
+    /* Mobile Contact Buttons */
+    .contact-buttons {
+        margin-top: 1rem;
+    }
+    
+    .contact-buttons .btn {
+        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+        border-radius: 12px;
+    }
+    
+    /* Add top margin to results area to account for fixed filter */
+    .results-area {
+        margin-top: 200px; /* Adjust based on filter height */
+        padding: 1.5rem;
+        min-height: auto;
     }
     
     .search-stats {
@@ -618,6 +837,58 @@
         margin-top: 0.8rem;
     }
 }
+
+@media (min-width: 992px) {
+    .filter-sidebar-container {
+        width: 320px;
+    }
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Calculate and set navbar height
+    function updateNavbarHeight() {
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            const navbarHeight = navbar.offsetHeight;
+            document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
+        }
+    }
+    
+    // Update navbar height on load and resize
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
+    
+    // Mobile filter height adjustment
+    function adjustMobileLayout() {
+        if (window.innerWidth <= 991.98) {
+            const filterContainer = document.querySelector('.filter-sidebar-container');
+            const resultsArea = document.querySelector('.results-area');
+            
+            if (filterContainer && resultsArea) {
+                // Wait for DOM to be fully rendered
+                setTimeout(() => {
+                    const filterHeight = filterContainer.offsetHeight;
+                    const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+                    const totalOffset = navbarHeight + filterHeight + 20; // 20px for spacing
+                    
+                    resultsArea.style.marginTop = totalOffset + 'px';
+                }, 100);
+            }
+        } else {
+            // Reset margin for desktop
+            const resultsArea = document.querySelector('.results-area');
+            if (resultsArea) {
+                resultsArea.style.marginTop = '';
+            }
+        }
+    }
+    
+    // Adjust layout on load and resize
+    adjustMobileLayout();
+    window.addEventListener('resize', adjustMobileLayout);
+});
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/search.blade.php ENDPATH**/ ?>

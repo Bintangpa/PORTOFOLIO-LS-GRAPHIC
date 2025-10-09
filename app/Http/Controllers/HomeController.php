@@ -93,7 +93,7 @@ class HomeController extends Controller
             $query->latest();
         }
         
-        $portfolios = $query->paginate(12)->withQueryString();
+        $portfolios = $query->paginate(10)->withQueryString();
         
         return view('search', compact('portfolios', 'categories'));
     }
