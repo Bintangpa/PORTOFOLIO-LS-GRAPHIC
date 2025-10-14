@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             ContactSettingsSeeder::class,
             WebsiteSettingsSeeder::class,
+            NavbarSettingsSeeder::class,
             PortfolioSeeder::class,
         ]);
     }

@@ -198,7 +198,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<form action="<?php echo e(route('admin.about.update')); ?>" method="POST">
+<form action="<?php echo e(route('admin.about.update')); ?>" method="POST" id="aboutForm">
     <?php echo csrf_field(); ?>
     
     <!-- Hero Section -->
@@ -465,5 +465,23 @@
         </div>
     </div>
 </form>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation and loading state
+    const aboutForm = document.getElementById('aboutForm');
+    if (aboutForm) {
+        aboutForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
+});
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/admin/about/index.blade.php ENDPATH**/ ?>

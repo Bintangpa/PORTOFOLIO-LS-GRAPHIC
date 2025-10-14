@@ -270,44 +270,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Facebook</label>
-                            <input type="url" name="settings[social_facebook]" class="form-control" 
-                                   value="{{ $settings['social_facebook'] }}">
-                            <div class="form-text">URL halaman Facebook</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Twitter</label>
-                            <input type="url" name="settings[social_twitter]" class="form-control" 
-                                   value="{{ $settings['social_twitter'] }}">
-                            <div class="form-text">URL halaman Twitter</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">LinkedIn</label>
-                            <input type="url" name="settings[social_linkedin]" class="form-control" 
-                                   value="{{ $settings['social_linkedin'] }}">
-                            <div class="form-text">URL halaman LinkedIn</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">YouTube</label>
-                            <input type="url" name="settings[social_youtube]" class="form-control" 
-                                   value="{{ $settings['social_youtube'] }}">
-                            <div class="form-text">URL channel YouTube</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <label class="form-label">TikTok</label>
                             <input type="url" name="settings[social_tiktok]" class="form-control" 
                                    value="{{ $settings['social_tiktok'] }}">
@@ -333,12 +295,18 @@
 
 @section('scripts')
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Form validation and loading state
-    document.querySelector('form').addEventListener('submit', function(e) {
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
-        submitBtn.disabled = true;
-    });
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
 
     // Auto-resize textareas
     document.querySelectorAll('textarea').forEach(textarea => {
@@ -347,5 +315,6 @@
             this.style.height = this.scrollHeight + 'px';
         });
     });
+});
 </script>
 @endsection

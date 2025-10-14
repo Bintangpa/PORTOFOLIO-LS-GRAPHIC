@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactSetting;
+use App\Traits\CreatesNotifications;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    use CreatesNotifications;
     /**
      * Display the contact settings management page
      */
@@ -22,10 +24,6 @@ class ContactController extends Controller
             'contact_whatsapp' => $this->getSetting('contact_whatsapp', '+62 812-3456-7890'),
             'operating_hours' => $this->getSetting('operating_hours', "Senin - Jumat: 09:00 - 18:00\nSabtu: 09:00 - 15:00\nMinggu: Tutup"),
             'social_instagram' => $this->getSetting('social_instagram', 'https://instagram.com/littlestarstudio'),
-            'social_facebook' => $this->getSetting('social_facebook', 'https://facebook.com/littlestarstudio'),
-            'social_twitter' => $this->getSetting('social_twitter', 'https://twitter.com/littlestarstudio'),
-            'social_linkedin' => $this->getSetting('social_linkedin', 'https://linkedin.com/company/littlestarstudio'),
-            'social_youtube' => $this->getSetting('social_youtube', 'https://youtube.com/littlestarstudio'),
             'social_tiktok' => $this->getSetting('social_tiktok', 'https://tiktok.com/@littlestarstudio'),
         ];
         
@@ -46,10 +44,6 @@ class ContactController extends Controller
             'settings.company_tagline' => 'nullable|string|max:255',
             'settings.contact_whatsapp' => 'nullable|string|max:50',
             'settings.social_instagram' => 'nullable|url|max:255',
-            'settings.social_facebook' => 'nullable|url|max:255',
-            'settings.social_twitter' => 'nullable|url|max:255',
-            'settings.social_linkedin' => 'nullable|url|max:255',
-            'settings.social_youtube' => 'nullable|url|max:255',
             'settings.social_tiktok' => 'nullable|url|max:255',
         ], [
             'settings.company_name.required' => 'Nama perusahaan wajib diisi',
@@ -75,6 +69,9 @@ class ContactController extends Controller
                 );
             }
 
+            // Create notification
+            $this->createContactNotification();
+
             return redirect()->route('admin.contact.index')
                 ->with('success', 'Informasi kontak berhasil diperbarui!');
                 
@@ -95,10 +92,6 @@ class ContactController extends Controller
             'contact_whatsapp' => 'phone',
 
             'social_instagram' => 'url',
-            'social_facebook' => 'url',
-            'social_twitter' => 'url',
-            'social_linkedin' => 'url',
-            'social_youtube' => 'url',
             'social_tiktok' => 'url',
 
             'operating_hours' => 'textarea',
@@ -139,10 +132,6 @@ class ContactController extends Controller
 
             'operating_hours' => 'Jam Operasional',
             'social_instagram' => 'Instagram',
-            'social_facebook' => 'Facebook',
-            'social_twitter' => 'Twitter',
-            'social_linkedin' => 'LinkedIn',
-            'social_youtube' => 'YouTube',
             'social_tiktok' => 'TikTok',
         ];
 

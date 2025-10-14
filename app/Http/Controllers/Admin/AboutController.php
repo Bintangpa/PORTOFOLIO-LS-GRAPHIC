@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteSetting;
+use App\Traits\CreatesNotifications;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
+    use CreatesNotifications;
     public function index()
     {
         $settings = [
@@ -97,6 +99,9 @@ class AboutController extends Controller
                 ]
             );
         }
+
+        // Create notification
+        $this->createAboutNotification();
 
         return redirect()->route('admin.about.index')
             ->with('success', 'Pengaturan halaman tentang berhasil diperbarui!');

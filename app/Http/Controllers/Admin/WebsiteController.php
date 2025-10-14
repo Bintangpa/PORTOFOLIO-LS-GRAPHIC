@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteSetting;
+use App\Traits\CreatesNotifications;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
+    use CreatesNotifications;
     /**
      * Display the website settings management page
      */
@@ -124,6 +126,9 @@ class WebsiteController extends Controller
                     ]
                 );
             }
+
+            // Create notification
+            $this->createWebsiteNotification();
 
             return redirect()->route('admin.website.index')
                 ->with('success', 'Pengaturan website berhasil diperbarui!');

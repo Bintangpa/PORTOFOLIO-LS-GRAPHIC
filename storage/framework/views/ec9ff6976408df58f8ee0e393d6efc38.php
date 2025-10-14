@@ -723,6 +723,13 @@ unset($__errorArgs, $__bag); ?>
         // Add event listener for form submission
         portfolioForm.addEventListener('submit', function(e) {
             updateCategoryValue(); // Ensure category value is updated before submission
+            
+            // Show loading state on submit button
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
         });
         
         // Prevent default drag behaviors

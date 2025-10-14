@@ -469,12 +469,18 @@
 
 <?php $__env->startSection('scripts'); ?>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Form validation and loading state
-    document.querySelector('form').addEventListener('submit', function(e) {
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
-        submitBtn.disabled = true;
-    });
+    const websiteForm = document.querySelector('form');
+    if (websiteForm) {
+        websiteForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
 
     // Auto-resize textareas
     document.querySelectorAll('textarea').forEach(textarea => {
@@ -483,6 +489,7 @@
             this.style.height = this.scrollHeight + 'px';
         });
     });
+});
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/admin/website/index.blade.php ENDPATH**/ ?>

@@ -265,6 +265,174 @@
             gap: 15px;
         }
         
+        /* Notification Styles */
+        .notification-dropdown {
+            position: relative;
+        }
+        
+        .notification-bell {
+            background: rgba(30, 58, 138, 0.1);
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            color: #1e3a8a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .notification-bell:hover {
+            background: #1e3a8a;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            animation: pulse-notification 2s infinite;
+        }
+        
+        @keyframes pulse-notification {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .notification-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .notification-dropdown-menu.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-header h6 {
+            margin: 0;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .mark-all-read {
+            background: none;
+            border: none;
+            color: #1e3a8a;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .notification-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .notification-item:hover {
+            background: #f8fafc;
+        }
+        
+        .notification-item.unread {
+            background: rgba(30, 58, 138, 0.05);
+            border-left: 3px solid #1e3a8a;
+        }
+        
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: #1e3a8a;
+            border-radius: 50%;
+        }
+        
+        .notification-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        
+        .notification-message {
+            color: #6b7280;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+        
+        .notification-time {
+            color: #9ca3af;
+            font-size: 0.7rem;
+        }
+        
+        .notification-empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: #6b7280;
+        }
+        
+        .notification-empty i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        
         /* Mobile Menu Toggle in Top Bar */
         .mobile-menu-toggle-topbar {
             background: rgba(30, 58, 138, 0.1);
@@ -794,166 +962,20 @@
             }
         }
         
-        /* Loading Screen Styles */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+        /* Admin Dashboard - No Loading Screens */
+        /* Loading removed from admin dashboard as requested */
         
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .loading-content {
-            text-align: center;
-            color: white;
-        }
-        
-        .loading-logo {
-            margin-bottom: 1rem;
-            animation: pulse-admin 2s infinite;
-        }
-        
-        .loading-logo img {
-            width: 300px;
-            height: auto;
-            filter: brightness(0) invert(1);
-        }
-        
-        .loading-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-        }
-        
-        .loading-spinner {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-        }
-        
-        .loading-spinner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin-admin 1s linear infinite;
-        }
-        
-        .loading-spinner::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: calc(100% - 20px);
-            height: calc(100% - 20px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-bottom: 2px solid white;
-            border-radius: 50%;
-            animation: spin-admin 1.5s linear infinite reverse;
-        }
-        
-        .loading-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 2rem;
-        }
-        
-        .loading-dot {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            animation: bounce-admin 1.4s infinite ease-in-out;
-        }
-        
-        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-        .loading-dot:nth-child(3) { animation-delay: 0s; }
-        
-        @keyframes spin-admin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse-admin {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        @keyframes bounce-admin {
-            0%, 80%, 100% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        /* Page transition effects */
+        /* Admin content shows immediately without transitions */
         .admin-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .admin-content.loaded {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin-admin 1s ease-in-out infinite;
         }
     </style>
     
     <?php echo $__env->yieldContent('styles'); ?>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <img src="<?php echo e(asset('images/logo-ls.png')); ?>" alt="LittleStar Logo">
-            </div>
-            <div class="loading-text">ADMIN DASHBOARD</div>
-            <div class="loading-spinner"></div>
-            <div class="loading-dots">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-            </div>
-        </div>
-    </div>
+    <!-- No loading screens for admin dashboard -->
     
     <!-- Admin Content -->
     <div class="admin-content" id="adminContent">
@@ -990,6 +1012,12 @@
                 </a>
                 <a class="nav-link <?php echo e(request()->routeIs('admin.website.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.website.index')); ?>">
                     <i class="fas fa-cogs"></i> Website Settings
+                </a>
+                <a class="nav-link <?php echo e(request()->routeIs('admin.navbar.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.navbar.index')); ?>">
+                    <i class="fas fa-bars"></i> Navbar Control
+                </a>
+                <a class="nav-link <?php echo e(request()->routeIs('admin.portfolio-page.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.portfolio-page.index')); ?>">
+                    <i class="fas fa-briefcase"></i> Portfolio Page Control
                 </a>
                 <a class="nav-link <?php echo e(request()->routeIs('admin.about.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.about.index')); ?>">
                     <i class="fas fa-info-circle"></i> Kelola Halaman Tentang
@@ -1029,6 +1057,26 @@
         <div class="top-bar">
             <h2><i class="fas fa-chart-line"></i> <?php echo $__env->yieldContent('page-title', 'Dashboard'); ?></h2>
             <div class="user-info">
+                <!-- Notification Dropdown -->
+                <div class="notification-dropdown">
+                    <div class="notification-bell" id="notificationBell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                    </div>
+                    <div class="notification-dropdown-menu" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h6>Notifikasi</h6>
+                            <button class="mark-all-read" id="markAllRead">Tandai Semua Dibaca</button>
+                        </div>
+                        <div id="notificationList">
+                            <div class="notification-empty">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>Tidak ada notifikasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <span style="color: #666;"><?php echo e(now()->format('l, d F Y')); ?></span>
                 <!-- Mobile Menu Toggle in Top Bar -->
                 <button class="mobile-menu-toggle-topbar" id="mobileMenuToggleTopbar">
@@ -1037,22 +1085,7 @@
             </div>
         </div>
         
-        <!-- Alerts -->
-        <?php if(session('success')): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle"></i> <?php echo e(session('success')); ?>
-
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
-            </div>
-        <?php endif; ?>
-        
-        <?php if(session('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle"></i> <?php echo e(session('error')); ?>
-
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
-            </div>
-        <?php endif; ?>
+        <!-- Alerts removed - notifications now handled by notification system -->
         
             <!-- Page Content -->
             <?php echo $__env->yieldContent('content'); ?>
@@ -1061,85 +1094,13 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Loading Screen JavaScript -->
+    <!-- Universal Admin Loading Animation Script -->
+    <script src="<?php echo e(asset('js/admin-loading.js')); ?>"></script>
+    
+    <!-- Admin Dashboard JavaScript - No Loading -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const adminContent = document.getElementById('adminContent');
-            
-            // Hide loading screen and show content after page loads
-            function hideLoading() {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                    adminContent.classList.add('loaded');
-                }, 800); // Minimum loading time for better UX
-            }
-            
-            // Show loading screen for navigation
-            function showLoading() {
-                loadingScreen.classList.remove('hidden');
-                adminContent.classList.remove('loaded');
-            }
-            
-            // Handle page load
-            if (document.readyState === 'loading') {
-                window.addEventListener('load', hideLoading);
-            } else {
-                hideLoading();
-            }
-            
-            // Handle navigation clicks
-            document.addEventListener('click', function(e) {
-                const link = e.target.closest('a');
-                if (link && 
-                    link.href && 
-                    !link.href.startsWith('javascript:') &&
-                    !link.href.startsWith('#') &&
-                    !link.href.includes('mailto:') &&
-                    !link.href.includes('tel:') &&
-                    !link.target &&
-                    !link.download &&
-                    link.hostname === window.location.hostname) {
-                    
-                    // Don't show loading for dropdown toggles or buttons
-                    if (link.getAttribute('data-bs-toggle') || 
-                        link.classList.contains('dropdown-toggle') ||
-                        link.type === 'button' ||
-                        link.classList.contains('btn-close')) {
-                        return;
-                    }
-                    
-                    e.preventDefault();
-                    showLoading();
-                    
-                    // Navigate after a short delay
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 300);
-                }
-            });
-            
-            // Handle form submissions
-            document.addEventListener('submit', function(e) {
-                const form = e.target;
-                if (form.method.toLowerCase() === 'get') {
-                    showLoading();
-                }
-            });
-            
-            // Handle browser back/forward buttons
-            window.addEventListener('pageshow', function(e) {
-                if (e.persisted) {
-                    hideLoading();
-                }
-            });
-            
-            // Handle browser navigation
-            window.addEventListener('beforeunload', function() {
-                showLoading();
-            });
-            
-
+            // Admin dashboard loads instantly without loading screens
             
             // Sidebar toggle functionality
             const sidebarToggle = document.getElementById('sidebarToggle');
@@ -1245,7 +1206,145 @@
                     }
                 });
             }
+            
+            // Initialize notifications
+            initializeNotifications();
         });
+        
+        // Notification System
+        function initializeNotifications() {
+            const notificationBell = document.getElementById('notificationBell');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            const notificationBadge = document.getElementById('notificationBadge');
+            const notificationList = document.getElementById('notificationList');
+            const markAllRead = document.getElementById('markAllRead');
+            
+            // Load notifications on page load
+            loadNotifications();
+            
+            // Refresh notifications every 30 seconds
+            setInterval(loadNotifications, 30000);
+            
+            // Toggle notification dropdown
+            notificationBell.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!notificationDropdown.contains(e.target) && !notificationBell.contains(e.target)) {
+                    notificationDropdown.classList.remove('show');
+                }
+            });
+            
+            // Mark all as read
+            markAllRead.addEventListener('click', function() {
+                fetch('/admin/notifications/mark-all-read', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateNotificationBadge(0);
+                        loadNotifications();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+            
+            function loadNotifications() {
+                fetch('/admin/notifications/recent')
+                .then(response => response.json())
+                .then(data => {
+                    updateNotificationBadge(data.unread_count);
+                    renderNotifications(data.notifications);
+                })
+                .catch(error => console.error('Error loading notifications:', error));
+            }
+            
+            function updateNotificationBadge(count) {
+                if (count > 0) {
+                    notificationBadge.textContent = count > 99 ? '99+' : count;
+                    notificationBadge.style.display = 'flex';
+                } else {
+                    notificationBadge.style.display = 'none';
+                }
+            }
+            
+            function renderNotifications(notifications) {
+                if (notifications.length === 0) {
+                    notificationList.innerHTML = `
+                        <div class="notification-empty">
+                            <i class="fas fa-bell-slash"></i>
+                            <p>Tidak ada notifikasi</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                notificationList.innerHTML = notifications.map(notification => {
+                    const iconColors = {
+                        'portfolio': 'background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: white;',
+                        'navbar': 'background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white;',
+                        'website': 'background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;',
+                        'contact': 'background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white;',
+                        'about': 'background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); color: white;',
+                        'account': 'background: linear-gradient(135deg, #374151 0%, #1f2937 100%); color: white;',
+                        'system': 'background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white;'
+                    };
+                    
+                    return `
+                        <div class="notification-item d-flex align-items-start ${!notification.is_read ? 'unread' : ''}" 
+                             onclick="markAsRead(${notification.id})">
+                            <div class="notification-icon" style="${iconColors[notification.type] || iconColors.system}">
+                                <i class="${notification.icon}"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">${notification.title}</div>
+                                <div class="notification-message">${notification.message}</div>
+                                <div class="notification-time">${formatTimeAgo(notification.created_at)}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            function formatTimeAgo(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffInSeconds = Math.floor((now - date) / 1000);
+                
+                if (diffInSeconds < 60) return 'Baru saja';
+                if (diffInSeconds < 3600) return Math.floor(diffInSeconds / 60) + ' menit yang lalu';
+                if (diffInSeconds < 86400) return Math.floor(diffInSeconds / 3600) + ' jam yang lalu';
+                if (diffInSeconds < 2592000) return Math.floor(diffInSeconds / 86400) + ' hari yang lalu';
+                return date.toLocaleDateString('id-ID');
+            }
+            
+            // Global function for marking notifications as read
+            window.markAsRead = function(notificationId) {
+                fetch(`/admin/notifications/${notificationId}/mark-read`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateNotificationBadge(data.unread_count);
+                        loadNotifications();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            };
+        }
     </script>
     
     <?php echo $__env->yieldContent('scripts'); ?>

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Traits\CreatesNotifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
+    use CreatesNotifications;
     /**
      * Display the account settings page
      */
@@ -60,6 +62,9 @@ class AccountController extends Controller
                 'new_email' => $request->email,
                 'timestamp' => now()
             ]);
+
+            // Create notification
+            $this->createAccountNotification('update', 'profile');
 
             return redirect()->route('admin.account.index')
                 ->with('success', 'Profil berhasil diperbarui!');
@@ -163,6 +168,9 @@ class AccountController extends Controller
                 'admin_name' => $user->name,
                 'timestamp' => now()
             ]);
+
+            // Create notification
+            $this->createAccountNotification('update', 'password');
 
             // Clear form data and show success message
             return redirect()->route('admin.account.index')

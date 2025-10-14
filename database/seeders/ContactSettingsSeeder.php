@@ -174,49 +174,13 @@ class ContactSettingsSeeder extends Seeder
 
             // Social Media
             [
-                'key' => 'social_facebook',
-                'value' => 'https://facebook.com/littlestarstudio',
-                'type' => 'url',
-                'group' => 'social',
-                'label' => 'Facebook',
-                'description' => 'URL halaman Facebook',
-                'sort_order' => 1
-            ],
-            [
                 'key' => 'social_instagram',
                 'value' => 'https://instagram.com/littlestarstudio',
                 'type' => 'url',
                 'group' => 'social',
                 'label' => 'Instagram',
                 'description' => 'URL halaman Instagram',
-                'sort_order' => 2
-            ],
-            [
-                'key' => 'social_twitter',
-                'value' => 'https://twitter.com/littlestarstudio',
-                'type' => 'url',
-                'group' => 'social',
-                'label' => 'Twitter',
-                'description' => 'URL halaman Twitter',
-                'sort_order' => 3
-            ],
-            [
-                'key' => 'social_linkedin',
-                'value' => 'https://linkedin.com/company/littlestarstudio',
-                'type' => 'url',
-                'group' => 'social',
-                'label' => 'LinkedIn',
-                'description' => 'URL halaman LinkedIn',
-                'sort_order' => 4
-            ],
-            [
-                'key' => 'social_youtube',
-                'value' => 'https://youtube.com/littlestarstudio',
-                'type' => 'url',
-                'group' => 'social',
-                'label' => 'YouTube',
-                'description' => 'URL channel YouTube',
-                'sort_order' => 5
+                'sort_order' => 1
             ],
             [
                 'key' => 'social_tiktok',
@@ -225,7 +189,7 @@ class ContactSettingsSeeder extends Seeder
                 'group' => 'social',
                 'label' => 'TikTok',
                 'description' => 'URL halaman TikTok',
-                'sort_order' => 6
+                'sort_order' => 2
             ]
         ];
 

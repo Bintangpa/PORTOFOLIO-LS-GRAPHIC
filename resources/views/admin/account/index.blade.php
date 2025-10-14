@@ -467,7 +467,7 @@
                 }
             }
             
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
             submitBtn.disabled = true;
             
             // Try to refresh CSRF token before submission

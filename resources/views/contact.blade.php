@@ -143,26 +143,6 @@
                                 <i class="fab fa-instagram"></i>
                             </a>
                             @endif
-                            @if(\App\Models\ContactSetting::getValue('social_facebook'))
-                            <a href="{{ \App\Models\ContactSetting::getValue('social_facebook') }}" target="_blank" class="social-link">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            @endif
-                            @if(\App\Models\ContactSetting::getValue('social_twitter'))
-                            <a href="{{ \App\Models\ContactSetting::getValue('social_twitter') }}" target="_blank" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            @endif
-                            @if(\App\Models\ContactSetting::getValue('social_linkedin'))
-                            <a href="{{ \App\Models\ContactSetting::getValue('social_linkedin') }}" target="_blank" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            @endif
-                            @if(\App\Models\ContactSetting::getValue('social_youtube'))
-                            <a href="{{ \App\Models\ContactSetting::getValue('social_youtube') }}" target="_blank" class="social-link">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            @endif
                             @if(\App\Models\ContactSetting::getValue('social_tiktok'))
                             <a href="{{ \App\Models\ContactSetting::getValue('social_tiktok') }}" target="_blank" class="social-link">
                                 <i class="fab fa-tiktok"></i>

@@ -426,9 +426,196 @@
         font-size: 0.9rem;
     }
     
+    /* Social Media Section */
+    .social-media-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 60px 0;
+        margin-top: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .social-media-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="1000,100 1000,0 0,100"/></svg>') no-repeat bottom;
+        background-size: cover;
+    }
+    
+    .social-media-container {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .social-header h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #000099 0%, #0000cc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .social-header .lead {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin-bottom: 0;
+    }
+    
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 30px;
+        animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    .social-icon-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: white;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        position: relative;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .social-icon-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+    
+    .social-icon-link:hover::before {
+        left: 100%;
+    }
+    
+    .social-icon-link:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        color: white;
+        text-decoration: none;
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .social-icon-link i {
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon-link:hover i {
+        transform: scale(1.2);
+    }
+    
+    /* Tooltip styling */
+    .social-icon-link {
+        position: relative;
+    }
+    
+    .social-icon-link::after {
+        content: attr(title);
+        position: absolute;
+        bottom: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 1000;
+    }
+    
+    .social-icon-link:hover::after {
+        opacity: 1;
+        visibility: visible;
+        bottom: -40px;
+    }
+    
+    .social-instagram {
+        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    }
+    
+    .social-tiktok {
+        background: linear-gradient(135deg, #000000 0%, #333333 100%);
+    }
+    
+    .social-whatsapp {
+        background: linear-gradient(135deg, #25d366 0%, #1ebe57 100%);
+    }
+    
+    .social-email {
+        background: linear-gradient(135deg, #ea4335 0%, #d33b2c 100%);
+    }
+    
     @media (max-width: 768px) {
         .page-header h1 {
             font-size: 2rem;
+        }
+        
+        .social-media-section {
+            padding: 40px 0;
+            margin-top: 30px;
+        }
+        
+        .social-media-container {
+            padding: 30px 20px;
+            margin: 0 20px;
+        }
+        
+        .social-header h3 {
+            font-size: 2rem;
+        }
+        
+        .social-links {
+            gap: 20px;
+        }
+        
+        .social-icon-link {
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+        
+        .social-icon-link i {
+            font-size: 1.5rem;
+        }
+        
+        .social-icon-link:hover i {
+            transform: scale(1.1);
         }
         
         .search-form {
@@ -506,15 +693,17 @@
         <form action="<?php echo e(route('portfolio')); ?>" method="GET" class="search-form">
             <div class="search-input">
                 <input type="text" name="search" class="form-control" 
-                       placeholder="Cari portofolio berdasarkan judul, deskripsi, kategori, atau klien..." 
+                       placeholder="<?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_placeholder', 'Cari portofolio berdasarkan judul, deskripsi, kategori, atau klien...')); ?>" 
                        value="<?php echo e(request('search')); ?>">
             </div>
             <button type="submit" class="btn search-btn">
-                <i class="fas fa-search me-2"></i>Cari
+                <i class="fas fa-search me-2"></i><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_button', 'Cari')); ?>
+
             </button>
             <?php if(request('search') || request('category')): ?>
                 <a href="<?php echo e(route('portfolio')); ?>" class="btn btn-outline-secondary">
-                    <i class="fas fa-times me-2"></i>Reset
+                    <i class="fas fa-times me-2"></i><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_reset_button', 'Reset')); ?>
+
                 </a>
             <?php endif; ?>
         </form>
@@ -523,14 +712,14 @@
             <div class="mt-3">
                 <small class="text-muted">
                     <?php if(request('search') && request('category')): ?>
-                        Menampilkan hasil pencarian untuk: <strong>"<?php echo e(request('search')); ?>"</strong> 
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_results_for', 'Menampilkan hasil pencarian untuk:')); ?> <strong>"<?php echo e(request('search')); ?>"</strong> 
                         dalam kategori <strong>"<?php echo e(request('category')); ?>"</strong>
                     <?php elseif(request('search')): ?>
-                        Menampilkan hasil pencarian untuk: <strong>"<?php echo e(request('search')); ?>"</strong>
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_results_for', 'Menampilkan hasil pencarian untuk:')); ?> <strong>"<?php echo e(request('search')); ?>"</strong>
                     <?php elseif(request('category')): ?>
-                        Menampilkan portofolio kategori: <strong>"<?php echo e(request('category')); ?>"</strong>
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_category', 'Menampilkan portofolio kategori:')); ?> <strong>"<?php echo e(request('category')); ?>"</strong>
                     <?php endif; ?>
-                    (<?php echo e($portfolios->total()); ?> hasil ditemukan)
+                    (<?php echo e($portfolios->total()); ?> <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_search_results_found', 'hasil ditemukan')); ?>)
                 </small>
             </div>
         <?php endif; ?>
@@ -547,9 +736,10 @@
         <?php if($categories->count() > 0): ?>
             <div class="mt-3">
                 <div class="d-flex flex-wrap align-items-center gap-2">
-                    <small class="text-muted me-2">Filter kategori:</small>
+                    <small class="text-muted me-2"><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_filter_label', 'Filter kategori:')); ?></small>
                     <a href="<?php echo e(route('portfolio')); ?>" class="category-filter-btn <?php echo e(!request('category') ? 'active' : ''); ?>">
-                        Semua
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_filter_all', 'Semua')); ?>
+
                     </a>
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <a href="<?php echo e(route('portfolio')); ?>?category=<?php echo e(urlencode($category)); ?><?php echo e(request('search') ? '&search=' . urlencode(request('search')) : ''); ?>" 
@@ -609,7 +799,8 @@
 
                     </div>
                     <div class="pagination-info">
-                        Menampilkan <?php echo e($portfolios->firstItem()); ?> - <?php echo e($portfolios->lastItem()); ?> dari <?php echo e($portfolios->total()); ?> portofolio
+                        <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_pagination_showing', 'Menampilkan')); ?> <?php echo e($portfolios->firstItem()); ?> - <?php echo e($portfolios->lastItem()); ?> <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_pagination_of', 'dari')); ?> <?php echo e($portfolios->total()); ?> <?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_pagination_portfolios', 'portofolio')); ?>
+
                     </div>
                 </div>
             <?php endif; ?>
@@ -617,16 +808,78 @@
             <div class="empty-state">
                 <?php if(request('search')): ?>
                     <i class="fas fa-search fa-5x"></i>
-                    <h4>Tidak ada hasil ditemukan</h4>
-                    <p>Coba gunakan kata kunci yang berbeda atau <a href="<?php echo e(route('portfolio')); ?>">lihat semua portofolio</a></p>
+                    <h4><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_no_results_title', 'Tidak ada hasil ditemukan')); ?></h4>
+                    <p><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_no_results_message', 'Coba gunakan kata kunci yang berbeda atau')); ?> <a href="<?php echo e(route('portfolio')); ?>"><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_no_results_link', 'lihat semua portofolio')); ?></a></p>
                 <?php else: ?>
                     <i class="fas fa-folder-open fa-5x"></i>
-                    <h4>Belum ada portofolio</h4>
-                    <p>Portofolio akan segera ditampilkan di sini</p>
+                    <h4><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_empty_title', 'Belum ada portofolio')); ?></h4>
+                    <p><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_empty_message', 'Portofolio akan segera ditampilkan di sini')); ?></p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
+    
+    <!-- Social Media Section -->
+    <?php
+        $showSocial = \App\Models\WebsiteSetting::getValue('portfolio_show_social', '1');
+        $hasAnySocial = \App\Models\WebsiteSetting::getValue('portfolio_social_instagram') || 
+                       \App\Models\WebsiteSetting::getValue('portfolio_social_tiktok') || 
+                       \App\Models\WebsiteSetting::getValue('portfolio_social_whatsapp') || 
+                       \App\Models\WebsiteSetting::getValue('portfolio_social_email');
+    ?>
+    
+    <?php if($showSocial == '1'): ?>
+        <div class="social-media-section mt-5">
+            <div class="container">
+                <div class="social-media-container">
+                    <div class="social-header text-center mb-4">
+                        <h3><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_title', 'Ikuti Kami')); ?></h3>
+                        <p class="lead"><?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_subtitle', 'Dapatkan update terbaru dari karya-karya kami')); ?></p>
+                    </div>
+                    
+                    <?php if($hasAnySocial): ?>
+                        <div class="social-links">
+                            <?php if(\App\Models\WebsiteSetting::getValue('portfolio_social_instagram')): ?>
+                                <a href="<?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_instagram')); ?>" target="_blank" class="social-icon-link social-instagram" title="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            <?php endif; ?>
+                            
+                            <?php if(\App\Models\WebsiteSetting::getValue('portfolio_social_tiktok')): ?>
+                                <a href="<?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_tiktok')); ?>" target="_blank" class="social-icon-link social-tiktok" title="TikTok">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            <?php endif; ?>
+                            
+                            <?php if(\App\Models\WebsiteSetting::getValue('portfolio_social_whatsapp')): ?>
+                                <a href="https://wa.me/<?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_whatsapp')); ?>" target="_blank" class="social-icon-link social-whatsapp" title="WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            <?php endif; ?>
+                            
+                            <?php if(\App\Models\WebsiteSetting::getValue('portfolio_social_email')): ?>
+                                <a href="mailto:<?php echo e(\App\Models\WebsiteSetting::getValue('portfolio_social_email')); ?>" class="social-icon-link social-email" title="Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="text-center">
+                            <div class="alert alert-info d-inline-block">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Belum ada link media sosial yang dikonfigurasi. 
+                                <?php if(auth()->guard()->check()): ?>
+                                    <?php if(auth()->user()->isAdmin()): ?>
+                                        <a href="<?php echo e(route('admin.portfolio-page.index')); ?>" class="alert-link">Konfigurasi di sini</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\littlestar-std\resources\views/portfolio.blade.php ENDPATH**/ ?>

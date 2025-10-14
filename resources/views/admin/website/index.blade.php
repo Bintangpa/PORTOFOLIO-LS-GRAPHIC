@@ -469,12 +469,18 @@
 
 @section('scripts')
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Form validation and loading state
-    document.querySelector('form').addEventListener('submit', function(e) {
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
-        submitBtn.disabled = true;
-    });
+    const websiteForm = document.querySelector('form');
+    if (websiteForm) {
+        websiteForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
 
     // Auto-resize textareas
     document.querySelectorAll('textarea').forEach(textarea => {
@@ -483,5 +489,6 @@
             this.style.height = this.scrollHeight + 'px';
         });
     });
+});
 </script>
 @endsection

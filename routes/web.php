@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\NavbarController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PortfolioPageController;
 
 
 
@@ -49,6 +52,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::put('/account/profile', [AccountController::class, 'updateProfile'])->name('account.profile');
     Route::put('/account/password', [AccountController::class, 'updatePassword'])->name('account.password');
+    
+    // Navbar Control Routes
+    Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
+    Route::put('/navbar', [NavbarController::class, 'update'])->name('navbar.update');
+    
+    // Portfolio Page Control Routes
+    Route::get('/portfolio-page', [PortfolioPageController::class, 'index'])->name('portfolio-page.index');
+    Route::put('/portfolio-page', [PortfolioPageController::class, 'update'])->name('portfolio-page.update');
+    
+    // Notification Routes
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/recent', [NotificationController::class, 'recent'])->name('notifications.recent');
+    Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
     
     // CSRF Token refresh route
     Route::get('/csrf-token', function() {

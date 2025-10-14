@@ -200,7 +200,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('admin.about.update') }}" method="POST">
+<form action="{{ route('admin.about.update') }}" method="POST" id="aboutForm">
     @csrf
     
     <!-- Hero Section -->
@@ -467,4 +467,22 @@
         </div>
     </div>
 </form>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation and loading state
+    const aboutForm = document.getElementById('aboutForm');
+    if (aboutForm) {
+        aboutForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Menyimpan...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
+});
+</script>
 @endsection

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
+use App\Traits\CreatesNotifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
+    use CreatesNotifications;
     public function index()
     {
         $portfolios = Portfolio::latest()->paginate(10);
@@ -33,7 +35,7 @@ class PortfolioController extends Controller
 
         $imagePath = $request->file('image')->store('portfolios', 'public');
 
-        Portfolio::create([
+        $portfolio = Portfolio::create([
             'title' => $request->title,
             'description' => $request->description,
             'category' => $request->category,
@@ -42,6 +44,9 @@ class PortfolioController extends Controller
             'image_path' => $imagePath,
             'user_id' => auth()->id(),
         ]);
+
+        // Create notification
+        $this->createPortfolioNotification('create', $request->title, $portfolio->id);
 
         return redirect()->route('admin.portfolios.index')
             ->with('success', 'Portofolio berhasil ditambahkan!');
@@ -79,14 +84,26 @@ class PortfolioController extends Controller
 
         $portfolio->update($data);
 
+        // Create notification
+        if ($request->hasFile('image')) {
+            $this->createPortfolioNotification('upload', $portfolio->title, $portfolio->id);
+        } else {
+            $this->createPortfolioNotification('update', $portfolio->title, $portfolio->id);
+        }
+
         return redirect()->route('admin.portfolios.index')
             ->with('success', 'Portofolio berhasil diupdate!');
     }
 
     public function destroy(Portfolio $portfolio)
     {
+        $portfolioTitle = $portfolio->title;
+        
         Storage::disk('public')->delete($portfolio->image_path);
         $portfolio->delete();
+
+        // Create notification
+        $this->createPortfolioNotification('delete', $portfolioTitle);
 
         return redirect()->route('admin.portfolios.index')
             ->with('success', 'Portofolio berhasil dihapus!');
